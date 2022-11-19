@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2668553152172104650}
   - component: {fileID: 2668553152165703054}
   - component: {fileID: 831020040957139997}
+  - component: {fileID: 773800178342132283}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -147,7 +148,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e87e6838ff880e43b2a9f7819b4a02e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  hitPoints: 100
+--- !u!114 &773800178342132283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2668553152176429164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8febbf8a94daf994997133cc464ea6a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameOverCanvas: {fileID: 0}
 --- !u!1 &2668553152176429166
 GameObject:
   m_ObjectHideFlags: 0
@@ -412,6 +426,14 @@ PrefabInstance:
       propertyPath: FPCamera
       value: 
       objectReference: {fileID: 2668553152175184458}
+    - target: {fileID: 2382970895894699079, guid: 00adda1d9c4fec446a54650e1ec368ec, type: 3}
+      propertyPath: hitEffect
+      value: 
+      objectReference: {fileID: 100014, guid: 5332791ebce075d4a9e56f4581e7fb47, type: 3}
+    - target: {fileID: 3418411499822628541, guid: 00adda1d9c4fec446a54650e1ec368ec, type: 3}
+      propertyPath: m_Name
+      value: MuzzleVFX
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00adda1d9c4fec446a54650e1ec368ec, type: 3}
 --- !u!4 &6144312152342148649 stripped
