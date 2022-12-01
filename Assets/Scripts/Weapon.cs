@@ -12,12 +12,11 @@ public class Weapon : MonoBehaviour
     [SerializeField] GameObject muzzleFlashThree;
     [SerializeField] GameObject hitEffect;
     [SerializeField] Ammo ammoSlot;
+    [SerializeField] AmmoType ammoType;
     [SerializeField] float timeBetweenShots = 0.5f;
     [SerializeField] bool fullAuto = false;
 
     bool canShoot = true;
-
-    float lastShotTimeStamp = System.DateTime.Now.Minute * 0.6f + System.DateTime.Now.Second * 0.01f;
 
     void OnEnable() 
     {
@@ -35,11 +34,11 @@ public class Weapon : MonoBehaviour
     IEnumerator Shoot()
     {
         canShoot = false;
-        if(ammoSlot.GetCurrentAmmo() >= 0)
+        if(ammoSlot.GetCurrentAmmo(ammoType) >= 1)
         {
             PlayMuzzleFlash();
             ProcessRaycast();
-            ammoSlot.ReduceCurrentAmmo(); 
+            ammoSlot.ReduceCurrentAmmo(ammoType); 
         }
         else
         {

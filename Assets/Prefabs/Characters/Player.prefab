@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 3806794664171081571}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -175,7 +175,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67abd3031e985fd409c1acd1c48e8a45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ammoAmount: 10
+  ammoSlots:
+  - ammoType: 0
+    ammoAmount: 10
+  - ammoType: 1
+    ammoAmount: 0
+  - ammoType: 2
+    ammoAmount: 0
+  - ammoType: 3
+    ammoAmount: 0
 --- !u!1 &2668553152176429166
 GameObject:
   m_ObjectHideFlags: 0
@@ -354,6 +362,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8734277617641762186}
+  - component: {fileID: 655435341}
   m_Layer: 0
   m_Name: Weapons
   m_TagString: Untagged
@@ -380,6 +389,19 @@ Transform:
   m_Father: {fileID: 2668553152176718922}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &655435341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6351541835608936334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a011f527a44e3264c8ffb8ac00c6b105, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentWeapon: 0
 --- !u!1001 &133615452223727641
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -446,6 +468,10 @@ PrefabInstance:
     - target: {fileID: 2904726064515102630, guid: a8a8c38df7414bd4e837285ff514f1ef, type: 3}
       propertyPath: m_Name
       value: Sniper
+      objectReference: {fileID: 0}
+    - target: {fileID: 2904726064515102630, guid: a8a8c38df7414bd4e837285ff514f1ef, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4354926739978374127, guid: a8a8c38df7414bd4e837285ff514f1ef, type: 3}
       propertyPath: FPCamera
@@ -637,7 +663,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 896743762702429316, guid: 00adda1d9c4fec446a54650e1ec368ec, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2382970895894699079, guid: 00adda1d9c4fec446a54650e1ec368ec, type: 3}
       propertyPath: FPCamera

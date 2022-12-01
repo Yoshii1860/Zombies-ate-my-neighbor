@@ -105,7 +105,8 @@ MonoBehaviour:
   muzzleFlashThree: {fileID: 8451416934783797945}
   hitEffect: {fileID: 100014, guid: 5332791ebce075d4a9e56f4581e7fb47, type: 3}
   ammoSlot: {fileID: 0}
-  timeBetweenShots: 2
+  ammoType: 2
+  timeBetweenShots: 1.3
   fullAuto: 0
 --- !u!1001 &8451416934783896605
 PrefabInstance:
