@@ -78,7 +78,7 @@ public class WeaponSwitcher : MonoBehaviour
 
         foreach(Transform weapon in transform)
         {
-            if(weaponIndex == currentWeapon)
+            if(weaponIndex == currentWeapon && weapon.gameObject.GetComponent<Weapon>().pickedUp == true)
             {
                 weapon.gameObject.SetActive(true);
             }

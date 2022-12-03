@@ -15,6 +15,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] AmmoType ammoType;
     [SerializeField] float timeBetweenShots = 0.5f;
     [SerializeField] bool fullAuto = false;
+    [SerializeField] public bool pickedUp = false;
 
     bool canShoot = true;
 
