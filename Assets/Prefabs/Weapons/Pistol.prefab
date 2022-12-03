@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 026889233f5fca040b0df4f4cc89c46c, type: 2}
+  - {fileID: 2100000, guid: 7fa7d9e69ee27f540b3b4e2921cc279c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -105,7 +105,9 @@ MonoBehaviour:
   muzzleFlashThree: {fileID: 3418411499822628543}
   hitEffect: {fileID: 100014, guid: 5332791ebce075d4a9e56f4581e7fb47, type: 3}
   ammoSlot: {fileID: 0}
+  ammoType: 0
   timeBetweenShots: 0.8
+  fullAuto: 0
 --- !u!1001 &3418411499822528539
 PrefabInstance:
   m_ObjectHideFlags: 0
