@@ -50,13 +50,13 @@ public class WeaponPickup : MonoBehaviour
 
     void NewWeaponPickup()
     {
-        GameObject child = gameObjectClicked.transform.GetChild(3).gameObject;
-        Destroy(child);
-        gameObjectClicked.GetComponent<BoxContent>().weapon.GetComponent<Weapon>().pickedUp = true;
+        GameObject child = gameObjectClicked.GetComponent<BoxContent>().weapon;
+        child.GetComponent<Weapon>().pickedUp = true;
         foreach (Transform oldChild in weapons)
         {
             oldChild.gameObject.SetActive(false);
         }
-        gameObjectClicked.GetComponent<BoxContent>().weapon.SetActive(true);
+        child.SetActive(true);
+        Destroy(gameObjectClicked.transform.GetChild(2).gameObject);
     }
 }
