@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 831020040957139997}
   - component: {fileID: 773800178342132283}
   - component: {fileID: 3806794664171081571}
+  - component: {fileID: 222187059}
+  - component: {fileID: 222187066}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -64,10 +66,10 @@ CapsuleCollider:
   m_Material: {fileID: 13400000, guid: 8cf006c4cc212fb43bd55bb4186c7ad3, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1.6
+  m_Radius: 0.3
+  m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!114 &2668553152165703054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,9 +84,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 2668553152175184458}
   movementSettings:
-    ForwardSpeed: 8
-    BackwardSpeed: 4
-    StrafeSpeed: 4
+    ForwardSpeed: 50
+    BackwardSpeed: 50
+    StrafeSpeed: 50
     RunMultiplier: 2
     RunKey: 304
     JumpForce: 50
@@ -92,8 +94,8 @@ MonoBehaviour:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: -90
-        value: 1
+        time: -97.5
+        value: 0.39858627
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -101,8 +103,8 @@ MonoBehaviour:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0
-        value: 1
+        time: -90.1875
+        value: 0.39810562
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -177,11 +179,39 @@ MonoBehaviour:
   - ammoType: 0
     ammoAmount: 10
   - ammoType: 1
-    ammoAmount: 0
+    ammoAmount: 20
   - ammoType: 2
-    ammoAmount: 0
+    ammoAmount: 5
   - ammoType: 3
-    ammoAmount: 0
+    ammoAmount: 2
+--- !u!114 &222187059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2668553152176429164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ed30703b99b73642b0468b71a235b12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ammoCanvas: {fileID: 0}
+--- !u!114 &222187066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2668553152176429164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 581d748acc3347d47b0e439121b71b77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  impactCanvas: {fileID: 0}
+  impactTime: 0.3
+  img: {fileID: 0}
 --- !u!1 &2668553152176429166
 GameObject:
   m_ObjectHideFlags: 0
@@ -210,7 +240,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2668553152176429166}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.6, z: 0}
+  m_LocalPosition: {x: 0, y: 1.1977997, z: 0.3332999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -582,6 +612,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2904726064515102630, guid: a8a8c38df7414bd4e837285ff514f1ef,
+        type: 3}
+      propertyPath: m_TagString
+      value: Weapon
+      objectReference: {fileID: 0}
     - target: {fileID: 4354926739978374127, guid: a8a8c38df7414bd4e837285ff514f1ef,
         type: 3}
       propertyPath: FPCamera
@@ -636,6 +671,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7126000453475285954, guid: 249ae382ca264204fb6cb68df50955bd,
+        type: 3}
+      propertyPath: m_TagString
+      value: Weapon
       objectReference: {fileID: 0}
     - target: {fileID: 7615431959549501816, guid: 249ae382ca264204fb6cb68df50955bd,
         type: 3}
@@ -810,7 +850,12 @@ PrefabInstance:
     - target: {fileID: 896743762702429316, guid: 00adda1d9c4fec446a54650e1ec368ec,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 896743762702429316, guid: 00adda1d9c4fec446a54650e1ec368ec,
+        type: 3}
+      propertyPath: m_TagString
+      value: Weapon
       objectReference: {fileID: 0}
     - target: {fileID: 2382970895894699079, guid: 00adda1d9c4fec446a54650e1ec368ec,
         type: 3}
@@ -861,6 +906,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7335289375388562941, guid: 9f3c8e1190a4f544f9dc71b49a4e0200,
+        type: 3}
+      propertyPath: m_TagString
+      value: Weapon
       objectReference: {fileID: 0}
     - target: {fileID: 7964614283986939719, guid: 9f3c8e1190a4f544f9dc71b49a4e0200,
         type: 3}
@@ -951,6 +1001,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Flashlight
+      objectReference: {fileID: 0}
+    - target: {fileID: 5820582432004537910, guid: 48eafe5ee4fa91644a93f50ce4754384,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6984104242685432111, guid: 48eafe5ee4fa91644a93f50ce4754384,
         type: 3}

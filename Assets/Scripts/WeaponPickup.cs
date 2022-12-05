@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class WeaponPickup : MonoBehaviour
 {
+    [SerializeField] GameObject ammoCanvas;
+
     float openTime = 2;
     GameObject gameObjectClicked;
     UnityEngine.AI.NavMeshAgent navMeshAgent;
@@ -12,7 +15,6 @@ public class WeaponPickup : MonoBehaviour
     void Start()
     {
         weapons = transform.GetChild(0).GetChild(0);
-        Debug.Log(weapons);
     }
 
    void Update()
@@ -24,6 +26,7 @@ public class WeaponPickup : MonoBehaviour
             if(Physics.Raycast(ray, out rayHit, 100.0f))
             {
                 gameObjectClicked = rayHit.collider.gameObject;
+                Debug.Log(gameObjectClicked);
                 float distanceToTarget = Vector3.Distance(gameObjectClicked.transform.position, transform.position);
                 if(gameObjectClicked.GetComponent<BoxContent>().isOpen == false && distanceToTarget <= 2)
                 {
@@ -57,6 +60,7 @@ public class WeaponPickup : MonoBehaviour
             oldChild.gameObject.SetActive(false);
         }
         child.SetActive(true);
+        ammoCanvas.SetActive(true);
         Destroy(gameObjectClicked.transform.GetChild(2).gameObject);
     }
 }
