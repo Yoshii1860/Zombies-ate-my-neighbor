@@ -12,6 +12,7 @@ public class SingleZombieTrigger : MonoBehaviour
         {
             zombie.SetActive(true);
             audio.Play();
+            Destroy(gameObject);
         }
     }
 }

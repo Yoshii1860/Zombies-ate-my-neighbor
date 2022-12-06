@@ -18,6 +18,8 @@ public class Weapon : MonoBehaviour
     [SerializeField] bool fullAuto = false;
     [SerializeField] public bool pickedUp = false;
     [SerializeField] TextMeshProUGUI ammoText;
+    [SerializeField] AudioSource weaponShotAudio;
+    [SerializeField] AudioSource noAmmoAudio;
     
     bool canShoot = true;
 
@@ -49,11 +51,12 @@ public class Weapon : MonoBehaviour
         {
             PlayMuzzleFlash();
             ProcessRaycast();
+            weaponShotAudio.Play();
             ammoSlot.ReduceCurrentAmmo(ammoType);
         }
         else
         {
-            Debug.Log("NO AMMO");
+            noAmmoAudio.Play();
         }
         yield return new WaitForSeconds(timeBetweenShots);
         canShoot = true;

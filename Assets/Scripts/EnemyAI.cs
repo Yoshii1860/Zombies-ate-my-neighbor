@@ -15,12 +15,15 @@ public class EnemyAI : MonoBehaviour
     bool isProvoked = false;
     Vector3 startPosition;
     EnemyHealth health;
+    AudioSource audioSource;
+    public AudioClip shoutClip;
 
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         health = GetComponent<EnemyHealth>();
         startPosition = transform.position;
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -40,6 +43,8 @@ public class EnemyAI : MonoBehaviour
         }
         else if(distanceToTarget <= chaseRange)
         {
+            audioSource.Play();
+            audioSource.PlayOneShot(shoutClip, 1f);
             isProvoked = true;
         }
 
@@ -70,6 +75,7 @@ public class EnemyAI : MonoBehaviour
         {
             isProvoked = false;
             navMeshAgent.SetDestination(startPosition);
+            audioSource.Stop();
         }
     }
 
