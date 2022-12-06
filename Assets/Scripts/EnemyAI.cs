@@ -9,6 +9,8 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] float returnRange = 20f;
     [SerializeField] float turnSpeed = 5f;
     [SerializeField] Transform target;
+    public AudioClip deathSound;
+    public AudioClip shoutClip;
 
     NavMeshAgent navMeshAgent;
     float distanceToTarget = Mathf.Infinity;
@@ -16,7 +18,6 @@ public class EnemyAI : MonoBehaviour
     Vector3 startPosition;
     EnemyHealth health;
     AudioSource audioSource;
-    public AudioClip shoutClip;
 
     void Start()
     {
@@ -31,11 +32,13 @@ public class EnemyAI : MonoBehaviour
     {
         if (health.IsDead())
         {
+            audioSource.Stop();
+            audioSource.clip = deathSound;
+            audioSource.PlayOneShot(deathSound, 1.5f);
             enabled = false;
             navMeshAgent.enabled = false;
             GetComponent<Collider>().enabled = false;
             GetComponent<EnemyAttack>().enabled = false;
-            audioSource.Stop();
         }
 
         distanceToTarget = Vector3.Distance(target.position, transform.position);

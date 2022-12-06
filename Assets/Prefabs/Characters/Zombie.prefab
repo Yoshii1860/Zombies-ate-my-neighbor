@@ -134,6 +134,7 @@ MonoBehaviour:
   returnRange: 25
   turnSpeed: 5
   target: {fileID: 0}
+  deathSound: {fileID: 8300000, guid: 34bd3382a550a47448fb17a1d904ba13, type: 3}
   shoutClip: {fileID: 8300000, guid: 2889a8c3faeb80f4ebb027512312bb97, type: 3}
 --- !u!114 &8828680829837028297
 MonoBehaviour:

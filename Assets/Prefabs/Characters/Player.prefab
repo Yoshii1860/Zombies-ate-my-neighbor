@@ -165,6 +165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOverCanvas: {fileID: 0}
+  deathAudio: {fileID: 0}
 --- !u!114 &3806794664171081571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,7 +215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   impactCanvas: {fileID: 0}
-  impactTime: 0.3
+  impactTime: 10
   img: {fileID: 0}
   damageTaken: {fileID: 0}
   damageTakenClip: {fileID: 8300000, guid: 788f938a02ad1734f876248f9ae72876, type: 3}

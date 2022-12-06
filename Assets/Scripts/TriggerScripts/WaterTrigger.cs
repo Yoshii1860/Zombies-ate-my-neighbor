@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class WaterTrigger : MonoBehaviour
 {
-    [SerializeField] GameObject playerSounds;
+    [SerializeField] PlayerSounds playerSounds;
 
     private void OnTriggerEnter(Collider other) 
     {
         if(other.gameObject.tag == "Player")
         {
-            playerSounds.GetComponent<PlayerSounds>().ChangeSoundToWater();
+            playerSounds.ChangeSoundToWater();
+            playerSounds.ChangeEnvironment();
         }
     }
 
@@ -18,7 +19,8 @@ public class WaterTrigger : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
-            playerSounds.GetComponent<PlayerSounds>().ChangeSoundToGrass();
+            playerSounds.ChangeSoundToGrass();
+            playerSounds.ChangeEnvironment();
         }
     }
 }

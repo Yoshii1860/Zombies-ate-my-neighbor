@@ -15,17 +15,12 @@ public class PlayerSounds : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.W) 
-        || Input.GetKeyDown(KeyCode.A)
-        || Input.GetKeyDown(KeyCode.S)
-        || Input.GetKeyDown(KeyCode.D))
-        {
-            if(!movementSounds.isPlaying)
-            {
-                movementSounds.Play();
-            }
-        }
+        WalkSound();
+        StopWalkSound();
+    }
 
+    void StopWalkSound()
+    {
         if(Input.GetKeyUp(KeyCode.W) 
         || Input.GetKeyUp(KeyCode.A)
         || Input.GetKeyUp(KeyCode.S)
@@ -46,6 +41,20 @@ public class PlayerSounds : MonoBehaviour
         }
     }
 
+    void WalkSound()
+    {
+        if(Input.GetKeyDown(KeyCode.W) 
+        || Input.GetKeyDown(KeyCode.A)
+        || Input.GetKeyDown(KeyCode.S)
+        || Input.GetKeyDown(KeyCode.D))
+        {
+            if(!movementSounds.isPlaying)
+            {
+                movementSounds.Play();
+            }
+        }
+    }
+
     public void ChangeSoundToWater()
     {
         movementSounds.clip = stepsWater;
@@ -54,5 +63,19 @@ public class PlayerSounds : MonoBehaviour
     public void ChangeSoundToGrass()
     {
         movementSounds.clip = stepsGrass;
+    }
+
+    public void ChangeEnvironment()
+    {
+        if(Input.GetKey(KeyCode.W) 
+        || Input.GetKey(KeyCode.A)
+        || Input.GetKey(KeyCode.S)
+        || Input.GetKey(KeyCode.D))
+        {
+            if(!movementSounds.isPlaying)
+            {
+                movementSounds.Play();
+            }
+        }
     }
 }

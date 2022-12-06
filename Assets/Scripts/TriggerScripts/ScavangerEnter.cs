@@ -14,11 +14,6 @@ public class ScavangerEnter : MonoBehaviour
 
     AudioSource fadeAudioSource;
 
-    private void Start()
-    {
-        blackScreen.canvasRenderer.SetAlpha(0f);
-    }
-
     private void OnTriggerEnter(Collider other) 
     {
         if(other.gameObject.tag == "Player")
