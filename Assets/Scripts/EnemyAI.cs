@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
-    [SerializeField] float chaseRange = 5f;
+    [SerializeField] public float chaseRange = 5f;
     [SerializeField] float returnRange = 20f;
     [SerializeField] float turnSpeed = 5f;
     [SerializeField] Transform target;
@@ -24,6 +24,7 @@ public class EnemyAI : MonoBehaviour
         health = GetComponent<EnemyHealth>();
         startPosition = transform.position;
         audioSource = GetComponent<AudioSource>();
+        GetComponent<Animator>().SetTrigger("idle");
     }
 
     void Update()
@@ -33,6 +34,8 @@ public class EnemyAI : MonoBehaviour
             enabled = false;
             navMeshAgent.enabled = false;
             GetComponent<Collider>().enabled = false;
+            GetComponent<EnemyAttack>().enabled = false;
+            audioSource.Stop();
         }
 
         distanceToTarget = Vector3.Distance(target.position, transform.position);
