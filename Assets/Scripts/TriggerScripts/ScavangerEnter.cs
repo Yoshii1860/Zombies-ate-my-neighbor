@@ -11,6 +11,7 @@ public class ScavangerEnter : MonoBehaviour
     [SerializeField] AudioSource slashAudio;
     [SerializeField] AudioSource heartbeatAudio;
     [SerializeField] SceneLoader gameSession;
+    [SerializeField] AudioSource environmentMusic;
 
     AudioSource fadeAudioSource;
 
@@ -26,11 +27,17 @@ public class ScavangerEnter : MonoBehaviour
                 }
                 scavanger.GetComponent<EnemyAI>().chaseRange = 500f;
                 Invoke("BlackScreenFadeIn", 8f);
-                Invoke("StopScavangers", 12f);
+                Invoke("FadeOutMusic", 8f);
+                Invoke("StopScavangers", 10f);
                 heartbeatAudio.PlayDelayed(12f);
                 Invoke("NextSceneForDelay", 22f);
             }
         }
+    }
+
+    void FadeOutMusic()
+    {
+        StartCoroutine(StartFade(environmentMusic, durationFadeOutAudio, 0f));
     }
 
     void BlackScreenFadeIn()

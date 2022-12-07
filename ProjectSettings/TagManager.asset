@@ -7,14 +7,15 @@ TagManager:
   - Shootable
   - Weapon
   - Interact
+  - Enemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Minimap
   - Water
   - UI
-  - 
+  - Dark
   - 
   - Lighting
   - Ground

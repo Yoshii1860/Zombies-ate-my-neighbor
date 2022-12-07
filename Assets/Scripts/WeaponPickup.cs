@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class WeaponPickup : MonoBehaviour
 {
     [SerializeField] Canvas ammoCanvas;
-    [SerializeField] AudioSource boxOpenAudio;
     [SerializeField] Canvas actionCanvas;
+    [SerializeField] Canvas reticleToHide;
+    [SerializeField] AudioSource boxOpenAudio;
+    [SerializeField] TextMeshProUGUI presseImg;
+    [SerializeField] TextMeshProUGUI alreadyGotImg;
 
     float openTime = 2;
     GameObject gameObjectClicked;
@@ -19,7 +23,11 @@ public class WeaponPickup : MonoBehaviour
     {
         weapons = transform.GetChild(0).GetChild(0);
         actionCanvas.enabled = false;
-        ammoCanvas.enabled = false;
+        int scene = SceneManager.GetActiveScene().buildIndex;
+        if(scene == 0)
+        {
+            ammoCanvas.enabled = false;
+        }
     }
 
    void Update()
@@ -49,7 +57,7 @@ public class WeaponPickup : MonoBehaviour
                 }
                 else
                 {
-                    return;
+                    return;           
                 }
             }
         }
@@ -65,21 +73,21 @@ public class WeaponPickup : MonoBehaviour
     void NewWeaponPickup()
     {
         GameObject child = gameObjectClicked.GetComponent<BoxContent>().weapon;
-        foreach (Transform oldChild in weapons)
-        {
-            oldChild.gameObject.SetActive(false);
-        }
-        child.SetActive(true);
         if(!child.GetComponent<Weapon>().pickedUp)
         {
+            foreach (Transform oldChild in weapons)
+            {
+                oldChild.gameObject.SetActive(false);
+            }
+            child.SetActive(true);
             child.GetComponent<AudioSource>().Play();
             child.GetComponent<Weapon>().pickedUp = true;
+            if(!ammoCanvas.enabled)
+            {
+                ammoCanvas.enabled = true;
+            }
+            Destroy(gameObjectClicked.transform.GetChild(2).gameObject);
         }
-        if(!ammoCanvas.enabled)
-        {
-            ammoCanvas.enabled = true;
-        }
-        Destroy(gameObjectClicked.transform.GetChild(2).gameObject);
     }
 
     void FindActionToDisplay()
@@ -89,6 +97,19 @@ public class WeaponPickup : MonoBehaviour
         if(Physics.Raycast(ray, out rayHit, 2.1f) && rayHit.transform.gameObject.tag == "Interact")
         {
             actionCanvas.enabled = true;
+            if(rayHit.transform.gameObject.GetComponent<BoxContent>().weapon.GetComponent<Weapon>().pickedUp 
+            && rayHit.transform.gameObject.GetComponent<BoxContent>().isOpen)
+            {
+                reticleToHide.enabled = false;
+                presseImg.enabled = false;
+                alreadyGotImg.enabled = true;
+            }
+            else
+            {
+                reticleToHide.enabled = false;
+                presseImg.enabled = true;
+                alreadyGotImg.enabled = false;
+            }
         }
     }
 
@@ -102,6 +123,7 @@ public class WeaponPickup : MonoBehaviour
             float dist = Vector3.Distance(gameObjectFocus.transform.position, transform.position);
             if(dist >= 2.1f)
             {
+                reticleToHide.enabled = true;
                 actionCanvas.enabled = false;
             }
         }

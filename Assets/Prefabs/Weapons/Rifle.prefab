@@ -101,17 +101,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FPCamera: {fileID: 0}
   range: 30
-  damage: 9
+  damage: 10
   muzzleFlashOne: {fileID: 340060197686401815}
   muzzleFlashTwo: {fileID: 340060197686401809}
   muzzleFlashThree: {fileID: 340060197671617143}
   hitEffect: {fileID: 100014, guid: 5332791ebce075d4a9e56f4581e7fb47, type: 3}
+  bloodEffect: {fileID: 4735379921403250263, guid: 643794ddeb6f5d14a9224428255fc68d,
+    type: 3}
+  chunkEffect: {fileID: 1834194341294532, guid: 5633515bb7c2ffc4ab46d14b26cf146d,
+    type: 3}
   ammoSlot: {fileID: 0}
   ammoType: 1
   timeBetweenShots: 0.2
   fullAuto: 1
   pickedUp: 0
+  chunkBlast: 0
   ammoText: {fileID: 0}
+  weaponShotAudio: {fileID: 0}
+  noAmmoAudio: {fileID: 0}
 --- !u!114 &8723301906621427901
 MonoBehaviour:
   m_ObjectHideFlags: 0
