@@ -7,6 +7,7 @@ public class PlayerSounds : MonoBehaviour
     [SerializeField] AudioSource movementSounds;
     [SerializeField] AudioClip stepsGrass;
     [SerializeField] AudioClip stepsWater;
+    [SerializeField] AudioClip stepsInside;
 
     private void Start() 
     {
@@ -63,6 +64,11 @@ public class PlayerSounds : MonoBehaviour
     public void ChangeSoundToGrass()
     {
         movementSounds.clip = stepsGrass;
+    }
+
+    public void ChangeSoundToInside()
+    {
+        movementSounds.clip = stepsInside;
     }
 
     public void ChangeEnvironment()

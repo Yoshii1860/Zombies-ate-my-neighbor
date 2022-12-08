@@ -5,9 +5,11 @@ using UnityEngine;
 public class StartLightFlickering : MonoBehaviour
 {
     [SerializeField] AddFlickering addFlickeringScript;
-    [SerializeField] AudioSource audioSource;
     [SerializeField] GameObject scavanger;
     [SerializeField] LightFlickering flashlight;
+    [SerializeField] AudioClip flickeringLights;
+    [SerializeField] AudioClip girlSound;
+    AudioSource audioSource;
 
     void Awake() 
     {
@@ -15,12 +17,18 @@ public class StartLightFlickering : MonoBehaviour
         flashlight.enabled = false;
     }
 
+    void Start() 
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     void OnTriggerEnter(Collider other) 
     {
         transform.Translate(0,-3,0);
         addFlickeringScript.enabled = true;
         flashlight.enabled = true;
-        audioSource.Play();
+        audioSource.PlayOneShot(flickeringLights, 0.7f);
+        audioSource.PlayOneShot(girlSound, 1f);
         StartCoroutine(LightsAndScavanger());
     }
 

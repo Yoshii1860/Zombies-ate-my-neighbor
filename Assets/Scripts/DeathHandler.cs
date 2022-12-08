@@ -23,6 +23,7 @@ public class DeathHandler : MonoBehaviour
         Cursor.visible = true;
         foreach(AudioSource audio in allAudioSources)
         {
+            if(audio != null)
             audio.Stop();
         }
         deathAudio.Play();

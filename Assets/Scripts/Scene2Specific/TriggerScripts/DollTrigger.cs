@@ -9,10 +9,9 @@ public class DollTrigger : MonoBehaviour
     [SerializeField] LightFlickering light;
     [SerializeField] GameObject flashlight;
     [SerializeField] GameObject blood;
-    [SerializeField] GameObject lightBulb;
     [SerializeField] AudioClip lightSound;
     [SerializeField] AudioClip footStepSound;
-    [SerializeField] AudioClip girlTalkSound;
+    [SerializeField] AudioClip girlBehindSound;
     AudioSource audioSource;
 
     bool isInside = false;
@@ -23,7 +22,6 @@ public class DollTrigger : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         blood.SetActive(false);
-        lightBulb.SetActive(false);
     }
 
     void OnTriggerEnter(Collider other) 
@@ -34,21 +32,15 @@ public class DollTrigger : MonoBehaviour
             {
                 transform.Translate(3.13f, 0, 0);
                 isInside = true;
-            }
-            count ++;
-            if(count == 2)
-            {
                 audioSource.PlayOneShot(footStepSound, 0.7f);
             }
+            count ++;
         }
-
-        //SOUND picked up Rifle - child laughter
 
         if(count >= 2 && rifle.pickedUp && !notFinished)
         {
-            //SOUND Child shout "Get Out!"
+            audioSource.PlayOneShot(girlBehindSound, 1f);
             notFinished = true;
-            Debug.Log("SecondState");
             light.maxIntensity = 0f;
             flashlight.SetActive(false);
             audioSource.PlayOneShot(lightSound, 0.4f);
@@ -59,7 +51,6 @@ public class DollTrigger : MonoBehaviour
     IEnumerator NewTriggerEvent()
     {
         yield return new WaitForSeconds(2);
-            lightBulb.SetActive(true);
             blood.SetActive(true);
             doll.transform.Translate(-6.14f, -1.38f, 0);
             flashlight.SetActive(true);
