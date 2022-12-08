@@ -12,18 +12,13 @@ public class StartScreenScene2 : MonoBehaviour
     {
         rbPlayer = rbPlayer.GetComponent<Rigidbody>();
         rbPlayer.isKinematic = true;
-        Invoke("BlackScreenFadeIn", 14f);
-        Invoke("EnableMovement", 14f);
-
+        StartCoroutine(StartSequence());
     }
 
-    void EnableMovement()
+    IEnumerator StartSequence()
     {
-        rbPlayer.isKinematic = false;
-    }
-
-    void BlackScreenFadeIn()
-    {
-        blackScreen.CrossFadeAlpha(0f, 0f, false);
+        yield return new WaitForSeconds(14);
+            rbPlayer.isKinematic = false;
+            blackScreen.CrossFadeAlpha(0f, 0f, false);
     }
 }
