@@ -84,4 +84,14 @@ public class PlayerSounds : MonoBehaviour
             }
         }
     }
+
+    public void StopSounds()
+    {
+        movementSounds.enabled = false;
+    }
+
+    public void StartSounds()
+    {
+        movementSounds.enabled = true;
+    }
 }

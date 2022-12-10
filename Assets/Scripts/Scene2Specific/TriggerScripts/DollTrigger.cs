@@ -12,6 +12,7 @@ public class DollTrigger : MonoBehaviour
     [SerializeField] AudioClip lightSound;
     [SerializeField] AudioClip footStepSound;
     [SerializeField] AudioClip girlBehindSound;
+    [SerializeField] GameObject moveDeadBody;
     AudioSource audioSource;
 
     bool isInside = false;
@@ -43,6 +44,7 @@ public class DollTrigger : MonoBehaviour
             notFinished = true;
             light.maxIntensity = 0f;
             flashlight.SetActive(false);
+            moveDeadBody.transform.position = new Vector3(623.42f,3.107f,196.199f);
             audioSource.PlayOneShot(lightSound, 0.4f);
             StartCoroutine(NewTriggerEvent());
         }

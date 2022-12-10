@@ -13,6 +13,7 @@ public class MovieTrigger : MonoBehaviour
     [SerializeField] AudioSource girlSound;
     [SerializeField] Rigidbody rb;
     [SerializeField] GameObject scavangerPool;
+    PlayerSounds ps;
     AudioSource audioSource;
     bool activeVideo = false;
 
@@ -25,6 +26,11 @@ public class MovieTrigger : MonoBehaviour
         scavangerPool.SetActive(false);
     }
 
+    private void Start() 
+    {
+        ps = rb.gameObject.GetComponent<PlayerSounds>();
+    }
+
     void OnTriggerEnter(Collider other) 
     {
         if(other.gameObject.tag == "Player")
@@ -35,6 +41,7 @@ public class MovieTrigger : MonoBehaviour
             audioSource.PlayOneShot(projectorStart, 0.2f);
             videoScreen.SetActive(true);
             videoPlayer.enabled = true;
+            ps.StopSounds();
             StartCoroutine(ActiveSequence());
         }
     }
@@ -43,6 +50,7 @@ public class MovieTrigger : MonoBehaviour
         yield return new WaitForSeconds(2);
             yield return new WaitWhile (() => videoPlayer.isPlaying);
                 rb.isKinematic = false;
+                ps.StartSounds();
                 audioSource.Stop();
                 audioSource.PlayOneShot(projectorStop, 0.2f);
                 projectorLight.SetActive(false);

@@ -12,12 +12,14 @@ public class WeaponPickup : MonoBehaviour
     [SerializeField] AudioSource boxOpenAudio;
     [SerializeField] TextMeshProUGUI presseImg;
     [SerializeField] TextMeshProUGUI alreadyGotImg;
+    [SerializeField] GameObject paper;
 
     float openTime = 2;
     GameObject gameObjectClicked;
     GameObject gameObjectFocus;
     UnityEngine.AI.NavMeshAgent navMeshAgent;
     Transform weapons;
+    PaperPickup paperPickup;
 
     void Start()
     {
@@ -28,6 +30,7 @@ public class WeaponPickup : MonoBehaviour
         {
             ammoCanvas.enabled = false;
         }
+        paperPickup = FindObjectOfType<PaperPickup>();
     }
 
    void Update()
@@ -43,7 +46,7 @@ public class WeaponPickup : MonoBehaviour
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit rayHit;
-            if(Physics.Raycast(ray, out rayHit, 2.1f))
+            if(Physics.Raycast(ray, out rayHit, 2.1f) && rayHit.transform.gameObject.tag == "Interact")
             {
                 gameObjectClicked = rayHit.collider.gameObject;
                 float distanceToTarget = Vector3.Distance(gameObjectClicked.transform.position, transform.position);
@@ -59,6 +62,10 @@ public class WeaponPickup : MonoBehaviour
                 {
                     return;           
                 }
+            }
+            else if(Physics.Raycast(ray, out rayHit, 2.1f) && rayHit.transform.gameObject.tag == "Action")
+            {
+                paper.SetActive(true);
             }
         }
     }
@@ -90,27 +97,34 @@ public class WeaponPickup : MonoBehaviour
         }
     }
 
-    void FindActionToDisplay()
+   void FindActionToDisplay()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit rayHit;
         if(Physics.Raycast(ray, out rayHit, 2.1f) && rayHit.transform.gameObject.tag == "Interact")
         {
             actionCanvas.enabled = true;
+            reticleToHide.enabled = false;
             if(rayHit.transform.gameObject.GetComponent<BoxContent>().weapon.GetComponent<Weapon>().pickedUp 
             && rayHit.transform.gameObject.GetComponent<BoxContent>().isOpen)
             {
-                reticleToHide.enabled = false;
                 presseImg.enabled = false;
                 alreadyGotImg.enabled = true;
             }
             else
             {
-                reticleToHide.enabled = false;
                 presseImg.enabled = true;
                 alreadyGotImg.enabled = false;
             }
         }
+        else if(Physics.Raycast(ray, out rayHit, 2.1f) && rayHit.transform.gameObject.tag == "Action")
+        {
+            actionCanvas.enabled = true;
+            reticleToHide.enabled = false;
+            presseImg.enabled = true;
+            alreadyGotImg.enabled = false;
+        }
+        else return;
     }
 
     void DisableActionDisplay()
