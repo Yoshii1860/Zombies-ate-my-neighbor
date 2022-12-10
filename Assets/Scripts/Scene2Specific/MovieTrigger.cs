@@ -16,6 +16,7 @@ public class MovieTrigger : MonoBehaviour
     PlayerSounds ps;
     AudioSource audioSource;
     bool activeVideo = false;
+    public bool movieTrigger = false;
 
     void Awake() 
     {
@@ -35,6 +36,7 @@ public class MovieTrigger : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
+            movieTrigger = true;
             rb.isKinematic = true;
             transform.GetComponent<BoxCollider>().enabled = false;
             projectorLight.SetActive(true);

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class PlayerSounds : MonoBehaviour
 {
@@ -8,16 +9,23 @@ public class PlayerSounds : MonoBehaviour
     [SerializeField] AudioClip stepsGrass;
     [SerializeField] AudioClip stepsWater;
     [SerializeField] AudioClip stepsInside;
+    [SerializeField] AudioClip jumpStart;
+    [SerializeField] AudioClip jumpEnd;
+    [SerializeField] AudioSource jumpSounds;
+    RigidbodyFirstPersonController rbc;
+    bool oneShot = true;
 
     private void Start() 
     {
         movementSounds.clip = stepsGrass;
+        rbc = GetComponent<RigidbodyFirstPersonController>();
     }
 
     void Update()
     {
         WalkSound();
         StopWalkSound();
+        JumpSound();
     }
 
     void StopWalkSound()
@@ -53,6 +61,23 @@ public class PlayerSounds : MonoBehaviour
             {
                 movementSounds.Play();
             }
+        }
+    }
+
+    void JumpSound()
+    {
+        if(rbc.Jumping && oneShot)
+        {
+            oneShot = false;
+            StopSounds();
+            jumpSounds.PlayOneShot(jumpStart, 1f);
+            StartCoroutine(JumpSounds());
+            StartSounds();
+        }
+        else if (!rbc.Jumping && !oneShot)
+        {
+            oneShot = true;
+            ChangeEnvironment();
         }
     }
 
@@ -93,5 +118,11 @@ public class PlayerSounds : MonoBehaviour
     public void StartSounds()
     {
         movementSounds.enabled = true;
+    }
+
+    IEnumerator JumpSounds()
+    {
+        yield return new WaitWhile (() => rbc.Jumping);
+        jumpSounds.PlayOneShot(jumpEnd, 1f);
     }
 }

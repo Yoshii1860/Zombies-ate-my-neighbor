@@ -5,23 +5,21 @@ using UnityEngine;
 public class ChangeSoundSteps : MonoBehaviour
 {
     [SerializeField] PlayerSounds playerSounds;
-    bool isInside = false;
+    [SerializeField] bool outside = false;
 
-    void OnTriggerEnter(Collider other) 
+    void OnTriggerExit(Collider other) 
     {
         if(other.gameObject.tag == "Player")
         {
-            if(!isInside)
-            {
+            if(outside)
+            { 
                 playerSounds.ChangeSoundToInside();
                 playerSounds.ChangeEnvironment();
-                isInside = true;
             }
             else
-            {
+            { 
                 playerSounds.ChangeSoundToGrass();
                 playerSounds.ChangeEnvironment();
-                isInside = false;
             }
         }
     }

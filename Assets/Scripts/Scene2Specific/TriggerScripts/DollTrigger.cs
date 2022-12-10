@@ -13,11 +13,13 @@ public class DollTrigger : MonoBehaviour
     [SerializeField] AudioClip footStepSound;
     [SerializeField] AudioClip girlBehindSound;
     [SerializeField] GameObject moveDeadBody;
+    [SerializeField] FogRenderer fogRenderer;
     AudioSource audioSource;
 
     bool isInside = false;
     bool notFinished = false;
     int count = 0;
+    public bool dollTrigger = false;
 
     void Start() 
     {
@@ -40,10 +42,13 @@ public class DollTrigger : MonoBehaviour
 
         if(count >= 2 && rifle.pickedUp && !notFinished)
         {
+            dollTrigger = true;
             audioSource.PlayOneShot(girlBehindSound, 1f);
             notFinished = true;
             light.maxIntensity = 0f;
             flashlight.SetActive(false);
+            fogRenderer.enabled = false;
+            RenderSettings.fogEndDistance = 1f;
             moveDeadBody.transform.position = new Vector3(623.42f,3.107f,196.199f);
             audioSource.PlayOneShot(lightSound, 0.4f);
             StartCoroutine(NewTriggerEvent());
@@ -55,10 +60,11 @@ public class DollTrigger : MonoBehaviour
         yield return new WaitForSeconds(2);
             blood.SetActive(true);
             doll.transform.Translate(-6.14f, -1.38f, 0);
+            RenderSettings.fogEndDistance = 10f;
+            fogRenderer.enabled = true;
             flashlight.SetActive(true);
             light.maxIntensity = 0.2f;
             light.smoothing = 15;
             light.gameObject.GetComponent<Light>().color = new Color(1,0,0,0.8f);
     }
-
 }

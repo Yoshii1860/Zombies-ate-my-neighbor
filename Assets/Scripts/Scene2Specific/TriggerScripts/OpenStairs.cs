@@ -12,14 +12,21 @@ public class OpenStairs : MonoBehaviour
     [SerializeField] AudioClip clip4;
     [SerializeField] AudioClip clip5;
     [SerializeField] AudioSource audioSource;
+    [SerializeField] MovieTrigger mt;
+    [SerializeField] DollTrigger dt;
+    bool played = false;
 
     void OnTriggerEnter(Collider other) 
     {
-        if(other.gameObject.tag == "Player")
+        if(other.gameObject.tag == "Player" && !played)
         {
-            barrickade.SetActive(false);
-            barrickadeNew.SetActive(true);
-            StartCoroutine(MakeMusicPlay());
+            if(dt.dollTrigger && mt.movieTrigger)
+            {    
+                played = true;
+                barrickade.SetActive(false);
+                barrickadeNew.SetActive(true);
+                StartCoroutine(MakeMusicPlay());
+            } else return;
         }
     }
 
