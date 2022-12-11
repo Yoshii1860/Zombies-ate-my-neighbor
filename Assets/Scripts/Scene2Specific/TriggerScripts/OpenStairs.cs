@@ -6,6 +6,7 @@ public class OpenStairs : MonoBehaviour
 {
     [SerializeField] GameObject barrickade;
     [SerializeField] GameObject barrickadeNew;
+    [SerializeField] GameObject doll;
     [SerializeField] AudioClip clip1;
     [SerializeField] AudioClip clip2;
     [SerializeField] AudioClip clip3;
@@ -25,6 +26,7 @@ public class OpenStairs : MonoBehaviour
                 played = true;
                 barrickade.SetActive(false);
                 barrickadeNew.SetActive(true);
+                doll.SetActive(false);
                 StartCoroutine(MakeMusicPlay());
             } else return;
         }
