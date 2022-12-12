@@ -5,6 +5,7 @@ using UnityEngine;
 public class DentistTrigger : MonoBehaviour
 {
     [SerializeField] GameObject dollStairs;
+    [SerializeField] GameObject dollClassroom;
     [SerializeField] DentistDollTrigger dollTrigger;
     [SerializeField] AudioSource audioSource;
 
@@ -26,7 +27,6 @@ public class DentistTrigger : MonoBehaviour
 
     IEnumerator StartFade()
     {
-        Debug.Log("Coroutine");
         float currentTime = 0;
         float start = audioSource.volume;
         float duration = 2;
@@ -36,6 +36,8 @@ public class DentistTrigger : MonoBehaviour
             audioSource.volume = Mathf.Lerp(start, 0, currentTime / duration);
             yield return null;
         }
+        dollTrigger.gameObject.SetActive(false);
+        dollClassroom.SetActive(true);
         yield break;
     }
 }

@@ -12,7 +12,11 @@ public class WeaponPickup : MonoBehaviour
     [SerializeField] AudioSource boxOpenAudio;
     [SerializeField] TextMeshProUGUI presseImg;
     [SerializeField] TextMeshProUGUI alreadyGotImg;
+    [SerializeField] TextMeshProUGUI needKey;
     [SerializeField] GameObject paper;
+    [SerializeField] AudioClip lockedDoor;
+    [SerializeField] AudioClip unlockDoor;
+    [SerializeField] GameObject newKey;
 
     float openTime = 2;
     GameObject gameObjectClicked;
@@ -20,6 +24,9 @@ public class WeaponPickup : MonoBehaviour
     UnityEngine.AI.NavMeshAgent navMeshAgent;
     Transform weapons;
     PaperPickup paperPickup;
+    AudioSource audioSource;
+    public bool key = false;
+    bool doorOpen = false;
 
     void Start()
     {
@@ -31,6 +38,7 @@ public class WeaponPickup : MonoBehaviour
             ammoCanvas.enabled = false;
         }
         paperPickup = FindObjectOfType<PaperPickup>();
+        audioSource = GetComponent<AudioSource>();
     }
 
    void Update()
@@ -58,14 +66,30 @@ public class WeaponPickup : MonoBehaviour
                 {
                     NewWeaponPickup();
                 }
-                else
-                {
-                    return;           
-                }
+                else return;
             }
             else if(Physics.Raycast(ray, out rayHit, 2.1f) && rayHit.transform.gameObject.tag == "Action")
             {
                 paper.SetActive(true);
+            }
+            else if(Physics.Raycast(ray, out rayHit, 2.1f) && rayHit.transform.gameObject.tag == "Door")
+            {
+                if(key && !doorOpen)
+                {
+                    rayHit.transform.GetComponent<Animator>().SetBool("open", true);
+                    audioSource.PlayOneShot(unlockDoor, 0.7f);
+                    doorOpen = true;
+                }
+                else
+                {
+                    audioSource.PlayOneShot(lockedDoor, 0.7f);
+                }
+            }
+            else if(Physics.Raycast(ray, out rayHit, 2.1f) && rayHit.transform.gameObject.tag == "Key")
+            {
+                newKey.SetActive(true);
+                key = true;
+                rayHit.transform.gameObject.SetActive(false);
             }
         }
     }
@@ -110,11 +134,13 @@ public class WeaponPickup : MonoBehaviour
             {
                 presseImg.enabled = false;
                 alreadyGotImg.enabled = true;
+                needKey.enabled = false;
             }
             else
             {
                 presseImg.enabled = true;
                 alreadyGotImg.enabled = false;
+                needKey.enabled = false;
             }
         }
         else if(Physics.Raycast(ray, out rayHit, 2.1f) && rayHit.transform.gameObject.tag == "Action")
@@ -123,8 +149,32 @@ public class WeaponPickup : MonoBehaviour
             reticleToHide.enabled = false;
             presseImg.enabled = true;
             alreadyGotImg.enabled = false;
+            needKey.enabled = false;
         }
-        else return;
+        else if(Physics.Raycast(ray, out rayHit, 2.1f) && rayHit.transform.gameObject.tag == "Door")
+        {
+            actionCanvas.enabled = true;
+            reticleToHide.enabled = false;
+            if(key)
+            {
+                presseImg.enabled = true;
+                needKey.enabled = false;
+            }
+            else
+            {
+                presseImg.enabled = false;
+                needKey.enabled = true;
+            }
+            alreadyGotImg.enabled = false;
+        }
+        else if(Physics.Raycast(ray, out rayHit, 2.1f) && rayHit.transform.gameObject.tag == "Key")
+        {
+            actionCanvas.enabled = true;
+            reticleToHide.enabled = false;
+            presseImg.enabled = true;
+            alreadyGotImg.enabled = false;
+            needKey.enabled = false;
+        }
     }
 
     void DisableActionDisplay()

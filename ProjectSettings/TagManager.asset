@@ -9,6 +9,8 @@ TagManager:
   - Interact
   - Enemy
   - Action
+  - Door
+  - Key
   layers:
   - Default
   - TransparentFX
