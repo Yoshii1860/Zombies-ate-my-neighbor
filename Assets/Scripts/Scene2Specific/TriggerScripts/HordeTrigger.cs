@@ -7,6 +7,8 @@ public class HordeTrigger : MonoBehaviour
     [SerializeField] GameObject horde;
     [SerializeField] AudioSource environment;
     [SerializeField] AudioClip chase;
+    [SerializeField] GameObject newFogRenderer;
+    [SerializeField] GameObject oldFogRenderer;
     AudioSource audioSource;
 
     void Start() 
@@ -19,6 +21,8 @@ public class HordeTrigger : MonoBehaviour
         {
             StartCoroutine(StartFadeOut());
             audioSource.Play();
+            oldFogRenderer.SetActive(false);
+            newFogRenderer.SetActive(true);
             StartCoroutine(HordeActive());
         }
     }
@@ -29,8 +33,6 @@ public class HordeTrigger : MonoBehaviour
         audioSource.PlayOneShot(chase, 1f);
         yield return new WaitForSeconds(3);
         horde.SetActive(true);
-        yield return new WaitWhile (() => audioSource.isPlaying);
-        StartCoroutine(StartFadeIn());
     }
 
     IEnumerator StartFadeOut()
@@ -42,19 +44,6 @@ public class HordeTrigger : MonoBehaviour
         {
             currentTime += Time.deltaTime;
             environment.volume = Mathf.Lerp(start, 0, currentTime / duration);
-            yield return null;
-        }
-    }
-
-    IEnumerator StartFadeIn()
-    {
-        float currentTime = 0;
-        float start = 0;
-        float duration = 2;
-        while (currentTime < duration)
-        {
-            currentTime += Time.deltaTime;
-            environment.volume = Mathf.Lerp(start, 1, currentTime / duration);
             yield return null;
         }
     }

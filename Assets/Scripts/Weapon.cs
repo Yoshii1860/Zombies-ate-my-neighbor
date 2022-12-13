@@ -89,12 +89,16 @@ public class Weapon : MonoBehaviour
         if (Physics.Raycast(FPCamera.transform.position, FPCamera.transform.forward, out hit, range))
         {
             EnemyHealth target = hit.transform.GetComponent<EnemyHealth>();
-            if (target == null) return;
+            if (target == null)
+            {
+                CreateHitImpact(hit);
+                return;
+            }
             target.TakeDamage(damage);
             bool dead = target.IsDead();
             if (!dead) 
             {
-                CreateHitImpact(hit);
+                CreateHitImpactEnemy(hit);
             }
             else return;
         }
@@ -104,7 +108,7 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    void CreateHitImpact(RaycastHit hit)
+    void CreateHitImpactEnemy(RaycastHit hit)
     {
         if(hit.transform.gameObject.tag == "Enemy")
         {
@@ -119,10 +123,11 @@ public class Weapon : MonoBehaviour
                 Destroy(impact, 0.5f);
             }
         }
-        else
-        {
-            GameObject impact = Instantiate(hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
-            Destroy(impact, 1);
-        }
+    }
+
+    void CreateHitImpact(RaycastHit hit)
+    {
+        GameObject impact = Instantiate(hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
+        Destroy(impact, 1);
     }
 }

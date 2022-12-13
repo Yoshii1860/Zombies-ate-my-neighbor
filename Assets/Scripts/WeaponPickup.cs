@@ -14,6 +14,7 @@ public class WeaponPickup : MonoBehaviour
     [SerializeField] TextMeshProUGUI alreadyGotImg;
     [SerializeField] TextMeshProUGUI needKey;
     [SerializeField] GameObject paper;
+    [SerializeField] AudioSource audioDoor;
     [SerializeField] AudioClip lockedDoor;
     [SerializeField] AudioClip unlockDoor;
     [SerializeField] GameObject newKey;
@@ -77,13 +78,15 @@ public class WeaponPickup : MonoBehaviour
                 if(key && !doorOpen)
                 {
                     rayHit.transform.GetComponent<Animator>().SetBool("open", true);
-                    audioSource.PlayOneShot(unlockDoor, 0.7f);
+                    audioDoor.PlayOneShot(unlockDoor, 0.7f);
+                    actionCanvas.enabled = false;
                     doorOpen = true;
                 }
-                else
+                else if(!key && !doorOpen)
                 {
-                    audioSource.PlayOneShot(lockedDoor, 0.7f);
+                    audioDoor.PlayOneShot(lockedDoor, 0.7f);
                 }
+                else return;
             }
             else if(Physics.Raycast(ray, out rayHit, 2.1f) && rayHit.transform.gameObject.tag == "Key")
             {
@@ -151,7 +154,7 @@ public class WeaponPickup : MonoBehaviour
             alreadyGotImg.enabled = false;
             needKey.enabled = false;
         }
-        else if(Physics.Raycast(ray, out rayHit, 2.1f) && rayHit.transform.gameObject.tag == "Door")
+        else if(Physics.Raycast(ray, out rayHit, 2.1f) && rayHit.transform.gameObject.tag == "Door" && !doorOpen)
         {
             actionCanvas.enabled = true;
             reticleToHide.enabled = false;
