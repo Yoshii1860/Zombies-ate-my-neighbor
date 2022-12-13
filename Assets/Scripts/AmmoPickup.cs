@@ -10,6 +10,8 @@ public class AmmoPickup : MonoBehaviour
     [SerializeField] AudioSource pickup;
     [SerializeField] GameObject canvas;
     [SerializeField] Transform canvasParent;
+    [SerializeField] GameObject canvasTwo;
+    [SerializeField] GameObject canvasThree;
 
     void OnTriggerEnter(Collider other) 
     {
@@ -17,25 +19,28 @@ public class AmmoPickup : MonoBehaviour
         {
             FindObjectOfType<Ammo>().IncreaseCurrentAmmo(ammoType, ammoAmount);
             pickup.Play();
-
-            GameObject newCanvas = Instantiate(canvas) as GameObject;
-            newCanvas.transform.SetParent (canvasParent);
-            newCanvas.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = ammoAmount.ToString();
-            newCanvas.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = ammoType.ToString();
-            
-            float i = 0;
-            float d = 3;
-            float t = 0.005f;
-            while(i < d)
+            if(canvasParent.childCount == 0)
             {
-                i = Time.deltaTime;
-                Debug.Log("i " + i);
-                newCanvas.transform.GetChild(0).GetComponent<RectTransform>().Translate(0,t,0);
-                t = t + 0.005f;
-                Debug.Log("t " + t);
+                NewCanvasInstantiate(canvas);
             }
-
-            //Destroy(gameObject);
+            else if (canvasParent.childCount == 1)
+            {
+                NewCanvasInstantiate(canvasTwo);
+            }
+            else if (canvasParent.childCount == 2)
+            {
+                NewCanvasInstantiate(canvasThree);
+            }
+            Destroy(gameObject);
         }
+    }
+
+    void NewCanvasInstantiate(GameObject canvas)
+    {
+        GameObject newCanvas = Instantiate(canvas) as GameObject;
+        newCanvas.transform.SetParent(canvasParent);
+        newCanvas.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = ammoAmount.ToString();
+        newCanvas.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = ammoType.ToString();
+        Destroy(newCanvas, 2f);
     }
 }

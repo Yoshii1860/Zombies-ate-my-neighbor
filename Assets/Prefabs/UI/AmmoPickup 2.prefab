@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 38, y: 45}
+  m_AnchoredPosition: {x: 38, y: 135}
   m_SizeDelta: {x: 31.18628, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1928353197160717062
@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 1197400827511272531}
   - component: {fileID: 363286782177647329}
   m_Layer: 5
-  m_Name: AmmoPickup
+  m_Name: AmmoPickup 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -273,7 +273,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 195, y: 45}
+  m_AnchoredPosition: {x: 195, y: 135}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1563430290949431688
@@ -408,7 +408,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 74, y: 45}
+  m_AnchoredPosition: {x: 74, y: 135}
   m_SizeDelta: {x: 31.18628, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2064442992179012868
