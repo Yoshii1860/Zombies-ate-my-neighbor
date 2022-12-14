@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 9136909339906593832}
   - component: {fileID: 1873133453829109401}
   - component: {fileID: 3399967936969283616}
+  - component: {fileID: 7880572738329880802}
+  - component: {fileID: 2692971521270963012}
   m_Layer: 0
   m_Name: Shotgun
   m_TagString: Untagged
@@ -214,6 +216,39 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7880572738329880802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7335289375388562941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40b8aad6a8182d44e85c803ebcc7ff83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bobMultiplier: 1
+  rig: {fileID: 7964614283986939719}
+  rotator: {fileID: 2692971521270963012}
+  bobbingSpeed: 0.1
+  bobbingAmount: 0.02
+  bobbingRotationAmount: 3
+--- !u!114 &2692971521270963012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7335289375388562941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cbc0f5157d22884c9d832889e0f1bc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  identifier: 
+  localAxis: {x: 0, y: 1, z: 0}
+  angleChanges: 0
 --- !u!1001 &8451416934783896605
 PrefabInstance:
   m_ObjectHideFlags: 0

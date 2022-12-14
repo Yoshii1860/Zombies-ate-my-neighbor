@@ -23,6 +23,15 @@ public class PlayerSounds : MonoBehaviour
 
     void Update()
     {
+        if(rbc.Running)
+        {
+            movementSounds.pitch = 1.2f;
+        }
+        else
+        {
+            movementSounds.pitch = 0.9f;
+        }
+        
         WalkSound();
         StopWalkSound();
         JumpSound();

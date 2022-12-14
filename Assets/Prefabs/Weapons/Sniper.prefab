@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 4354926739978374127}
   - component: {fileID: 5303678545457651394}
   - component: {fileID: 713700222797854038}
+  - component: {fileID: 3027136353019284596}
+  - component: {fileID: 8278489774277539509}
   m_Layer: 0
   m_Name: Sniper
   m_TagString: Untagged
@@ -233,6 +235,39 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3027136353019284596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2904726064515102630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cbc0f5157d22884c9d832889e0f1bc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  identifier: 
+  localAxis: {x: 0, y: 1, z: 0}
+  angleChanges: 0
+--- !u!114 &8278489774277539509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2904726064515102630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40b8aad6a8182d44e85c803ebcc7ff83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bobMultiplier: 1
+  rig: {fileID: 2523274026282773788}
+  rotator: {fileID: 3027136353019284596}
+  bobbingSpeed: 0.1
+  bobbingAmount: 0.02
+  bobbingRotationAmount: 3
 --- !u!1001 &5112014609677465069
 PrefabInstance:
   m_ObjectHideFlags: 0

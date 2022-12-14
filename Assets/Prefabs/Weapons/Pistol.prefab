@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 1689170656752782673}
   - component: {fileID: 2382970895894699079}
   - component: {fileID: 1515867075047615469}
+  - component: {fileID: 258355588837614916}
+  - component: {fileID: 4341138055123026340}
   m_Layer: 0
   m_Name: Pistol
   m_TagString: Untagged
@@ -214,6 +216,39 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &258355588837614916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 896743762702429316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40b8aad6a8182d44e85c803ebcc7ff83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bobMultiplier: 1
+  rig: {fileID: 520745336707003966}
+  rotator: {fileID: 4341138055123026340}
+  bobbingSpeed: 0.1
+  bobbingAmount: 0.02
+  bobbingRotationAmount: 3
+--- !u!114 &4341138055123026340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 896743762702429316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cbc0f5157d22884c9d832889e0f1bc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  identifier: 
+  localAxis: {x: 0, y: 1, z: 0}
+  angleChanges: 0
 --- !u!1001 &3418411499822528539
 PrefabInstance:
   m_ObjectHideFlags: 0

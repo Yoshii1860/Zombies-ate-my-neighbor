@@ -5,16 +5,23 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
+    Scene currentScene;
+
+    void Start() 
+    {
+        currentScene = SceneManager.GetActiveScene();
+    }
+
     public void ReloadGame()
     {
-        SceneManager.LoadScene(0);
+        //if Json exists, load, if not:
+        SceneManager.LoadScene(currentScene.buildIndex);
         Time.timeScale = 1;
     }
 
     public void NextScene()
     {
-        Scene currentScene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(currentScene.buildIndex + 1);
+       SceneManager.LoadScene(currentScene.buildIndex + 1);
     }
 
     public void QuitGame()
