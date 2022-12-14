@@ -12241,6 +12241,11 @@ PrefabInstance:
       propertyPath: gameOverCanvas
       value: 
       objectReference: {fileID: 1627632298}
+    - target: {fileID: 2668553152165703052, guid: b6679daa6f2c9a742845092e73420f5d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2668553152176429164, guid: b6679daa6f2c9a742845092e73420f5d,
         type: 3}
       propertyPath: m_Name
@@ -12471,7 +12476,12 @@ PrefabInstance:
     - target: {fileID: 3450282743718627340, guid: f6d73c7715ff0c34cbda12f224ce03b4,
         type: 3}
       propertyPath: m_Name
-      value: UI
+      value: NewUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 3450282743718627340, guid: f6d73c7715ff0c34cbda12f224ce03b4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3450282743718627341, guid: f6d73c7715ff0c34cbda12f224ce03b4,
         type: 3}
