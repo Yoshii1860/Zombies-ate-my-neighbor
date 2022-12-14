@@ -14,6 +14,12 @@ public class ScavangerEnter : MonoBehaviour
     [SerializeField] AudioSource environmentMusic;
 
     AudioSource fadeAudioSource;
+    SaveGame saveGame;
+
+    void Awake() 
+    {
+        saveGame = FindObjectOfType<SaveGame>();
+    }
 
     private void OnTriggerEnter(Collider other) 
     {
@@ -26,23 +32,23 @@ public class ScavangerEnter : MonoBehaviour
                     scavanger.SetActive(true);
                 }
                 scavanger.GetComponent<EnemyAI>().chaseRange = 500f;
-                Invoke("BlackScreenFadeIn", 8f);
-                Invoke("FadeOutMusic", 8f);
-                Invoke("StopScavangers", 10f);
-                heartbeatAudio.PlayDelayed(12f);
-                Invoke("NextSceneForDelay", 22f);
+                StartCoroutine(EndScene());
             }
         }
     }
 
-    void FadeOutMusic()
+    IEnumerator EndScene()
     {
-        StartCoroutine(StartFade(environmentMusic, durationFadeOutAudio, 0f));
-    }
-
-    void BlackScreenFadeIn()
-    {
+        yield return new WaitForSeconds(8);
         blackScreen.CrossFadeAlpha(1f, 4f, false);
+        StartCoroutine(StartFade(environmentMusic, durationFadeOutAudio, 0f));
+        yield return new WaitForSeconds(2);
+        StopScavangers();
+        yield return new WaitForSeconds(2);
+        heartbeatAudio.Play();
+        saveGame.enabled = true;
+        yield return new WaitWhile(() => heartbeatAudio.isPlaying);
+        gameSession.NextScene();
     }
 
     void StopScavangers()
@@ -67,10 +73,5 @@ public class ScavangerEnter : MonoBehaviour
             yield return null;
         }
         yield break;
-    }
-
-    void NextSceneForDelay()
-    {
-        gameSession.NextScene();
     }
 }

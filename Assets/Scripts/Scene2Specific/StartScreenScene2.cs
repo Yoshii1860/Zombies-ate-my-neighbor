@@ -10,13 +10,16 @@ public class StartScreenScene2 : MonoBehaviour
     [SerializeField] GameObject player;
     [SerializeField] AudioClip startAudio;
     [SerializeField] AudioClip gaspAudio;
+
     AudioSource audioSource;
     RigidbodyFirstPersonController rbc;
     AudioSource playerAudio;
     GameObject weapons;
+    LoadGame loadGame;
 
     void Start()
     {
+        loadGame = FindObjectOfType<LoadGame>();
         audioSource = GetComponent<AudioSource>();
         rbc = player.GetComponent<RigidbodyFirstPersonController>();
         playerAudio = player.GetComponent<AudioSource>();
@@ -39,6 +42,7 @@ public class StartScreenScene2 : MonoBehaviour
             rbc.enabled = true;
             playerAudio.enabled = true;
             weapons.SetActive(true);
+            loadGame.enabled = true;
             blackScreen.CrossFadeAlpha(0f, 0f, false);
     }
 }

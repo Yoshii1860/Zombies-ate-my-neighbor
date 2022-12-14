@@ -21,11 +21,18 @@ public class Scene2End : MonoBehaviour
     [SerializeField] PlayerSounds playerSounds;
     [SerializeField] GameObject quit;
     AudioSource audioSource;
+    LoadGame loadGame;
     float rbcFS = 0f;
     float rbcBS = 0f;
     float rbcSS = 0f;
     float rbcRM = 0f;
     bool once = false;
+
+    void Awake() 
+    {
+        loadGame = FindObjectOfType<LoadGame>();
+        loadGame.enabled = true;
+    }
 
     void Start() 
     {

@@ -25,7 +25,12 @@ public class Ammo : MonoBehaviour
 
     public void IncreaseCurrentAmmo(AmmoType ammoType, int ammoAmount)
     {
-        GetAmmoSlot(ammoType).ammoAmount += ammoAmount ;
+        GetAmmoSlot(ammoType).ammoAmount += ammoAmount;
+    }
+
+    public void SetAmmoOnLoad(AmmoType ammoType, int newAmmoAmount)
+    {
+        GetAmmoSlot(ammoType).ammoAmount = newAmmoAmount;
     }
 
     private AmmoSlot GetAmmoSlot(AmmoType ammoType)
