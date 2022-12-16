@@ -102,6 +102,7 @@ public class EnemyAI : MonoBehaviour
             navMeshAgent.enabled = false;
             GetComponent<Collider>().enabled = false;
             GetComponent<EnemyAttack>().enabled = false;
+            GetComponent<NavMeshAgent>().enabled = false;
         }
 
         distanceToTarget = Vector3.Distance(target.position, transform.position);

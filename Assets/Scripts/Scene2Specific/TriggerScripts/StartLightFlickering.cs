@@ -30,6 +30,7 @@ public class StartLightFlickering : MonoBehaviour
 
     void OnTriggerEnter(Collider other) 
     {
+        GetComponent<TriggeredScript>().isTriggered = true;
         transform.Translate(0,-3,0);
         addFlickeringScript.enabled = true;
         flashlight.enabled = true;

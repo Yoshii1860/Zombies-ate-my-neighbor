@@ -6,6 +6,11 @@ public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] float hitPoints = 100f;
 
+    public float GetHealth()
+    {
+        return hitPoints;
+    }
+
     public void ChangeHealth()
     {
         hitPoints = 100f;
@@ -20,4 +25,8 @@ public class PlayerHealth : MonoBehaviour
         }
     }
   
+  public void LoadHealth(float health)
+  {
+    hitPoints = health;
+  }
 }

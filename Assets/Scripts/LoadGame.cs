@@ -12,7 +12,17 @@ public class LoadGame : MonoBehaviour
     [SerializeField] Weapon shotgunPickedUp;
     [SerializeField] Weapon riflePickedUp;
     [SerializeField] Weapon sniperPickedUp;
+    [SerializeField] Canvas reticle;
+    [SerializeField] Canvas ammoDisplay;
+    [SerializeField] GameObject flashlight;
+    [SerializeField] SavePickups pickups;
+    [SerializeField] SaveEnemies enemies;
+    [SerializeField] SaveTriggers triggers;
+    [SerializeField] Transform player;
+
     Ammo ammo;
+    PlayerHealth playerHealth;
+
     int pistolAmmo;
     int shotgunAmmo;
     int rifleAmmo;
@@ -22,16 +32,34 @@ public class LoadGame : MonoBehaviour
     string loadRifle;
     string loadSniper;
 
+    float health;
+
+    Vector3 playerPosition;
+    float ppX;
+    float ppY;
+    float ppZ;
+
     void Awake() 
     {
-        this.enabled = false;
         ammo = FindObjectOfType<Ammo>();
+        playerHealth = player.GetComponent<PlayerHealth>();
+    }
+
+    void OnEnable() 
+    {
+        SetPlayerPosition();
     }
 
     void Start()
     {
+        Debug.Log("Load");
         LoadBullets();
         LoadWeapons();
+        LoadHealth();
+        LoadCanvas();
+        LoadPickups();
+        LoadEnemies();
+        LoadTriggers();
         this.enabled = false;
     }
 
@@ -98,5 +126,92 @@ public class LoadGame : MonoBehaviour
         {
             sniperPickedUp.pickedUp = false;
         }
+    }
+
+    void LoadHealth()
+    {
+        health = PlayerPrefs.GetFloat("health");
+        playerHealth.LoadHealth(health);
+    }
+
+    void SetPlayerPosition()
+    {
+        ppX = PlayerPrefs.GetFloat("ppX");
+        ppY = PlayerPrefs.GetFloat("ppY");
+        ppZ = PlayerPrefs.GetFloat("ppZ");
+        playerPosition = new Vector3(ppX, ppY, ppZ);
+        Debug.Log("LoadGame: " + playerPosition);
+        LoadPosition();
+    }
+
+    void LoadPosition()
+    {
+        player.position = playerPosition;
+        Debug.Log("LoadGame LoadPositionNow: " + playerPosition);
+        Debug.Log("LoadGame PlayerPositionNow: " + player.position);
+    }
+
+    void LoadCanvas()
+    {
+        if(PlayerPrefs.GetString("reticle") == "true")
+        {
+            reticle.enabled = true;
+        }
+        if(PlayerPrefs.GetString("ammoDisplay") == "true")
+        {
+            ammoDisplay.enabled = true;
+        }
+        if(PlayerPrefs.GetString("flashlight") == "true")
+        {
+            flashlight.SetActive(true);
+        }
+    }
+
+    void LoadPickups()
+    {   
+        int i = 0;
+        foreach(GameObject pickup in pickups.pickupObjects)
+        {
+            string nameString = pickup.name + i.ToString();
+            if(PlayerPrefs.GetString(nameString) == "true")
+            {
+                pickup.SetActive(false);
+            }
+            i++;
+        }
+    }
+
+    void LoadEnemies()
+    {   
+        int i = 0;
+        foreach(EnemyHealth enemy in enemies.enemyArray)
+        {
+            string nameString = enemy.transform.gameObject.name + i.ToString();
+            if(PlayerPrefs.GetString(nameString) == "true")
+            {
+                enemy.transform.gameObject.SetActive(false);
+            }
+            i++;
+        }
+    }
+
+    void LoadTriggers()
+    {   
+        int i = 0;
+        foreach(TriggeredScript trigger in triggers.triggerArray)
+        {
+            string nameString = trigger.transform.gameObject.name + i.ToString();
+            if(PlayerPrefs.GetString(nameString) == "true")
+            {
+                Debug.Log("Wants to deactivate a trigger");
+                trigger.transform.gameObject.SetActive(false);
+            }
+            i++;
+        }
+    }
+
+    public void LoadPlayerPosition()
+    {
+        player.position = playerPosition;
     }
 }

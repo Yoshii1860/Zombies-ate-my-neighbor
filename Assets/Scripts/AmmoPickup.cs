@@ -31,7 +31,7 @@ public class AmmoPickup : MonoBehaviour
             {
                 NewCanvasInstantiate(canvasThree);
             }
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 

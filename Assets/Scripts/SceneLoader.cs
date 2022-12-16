@@ -6,15 +6,27 @@ using UnityEngine.SceneManagement;
 public class SceneLoader : MonoBehaviour
 {
     Scene currentScene;
+    LoadGame loadGame;
+    SaveGame saveGame;
+    bool sameScene = false;
+
+    void OnEnable() 
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
 
     void Start() 
     {
         currentScene = SceneManager.GetActiveScene();
+        saveGame = FindObjectOfType<SaveGame>();
+        Transform player = FindObjectOfType<PlayerHealth>().transform;
+        Vector3 playerPosition = player.position;
+        saveGame.SetPlayerPosition(playerPosition);
     }
 
     public void ReloadGame()
     {
-        //if Json exists, load, if not:
+        sameScene = true;
         SceneManager.LoadScene(currentScene.buildIndex);
         Time.timeScale = 1;
     }
@@ -27,5 +39,15 @@ public class SceneLoader : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if(sameScene)
+        {
+            loadGame = FindObjectOfType<LoadGame>();
+            loadGame.enabled = true;
+            loadGame.LoadPlayerPosition();
+        }
     }
 }

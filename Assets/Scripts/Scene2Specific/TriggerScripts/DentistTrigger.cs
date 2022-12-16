@@ -38,6 +38,7 @@ public class DentistTrigger : MonoBehaviour
         }
         dollTrigger.gameObject.SetActive(false);
         dollClassroom.SetActive(true);
+        transform.parent.GetComponent<TriggeredScript>().isTriggered = true;
         yield break;
     }
 }

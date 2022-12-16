@@ -24,7 +24,6 @@ public class MovieTrigger : MonoBehaviour
         projectorLight.SetActive(false);
         videoScreen.SetActive(false);
         videoPlayer.enabled = false;
-        scavangerPool.SetActive(false);
     }
 
     private void Start() 
@@ -62,5 +61,6 @@ public class MovieTrigger : MonoBehaviour
                         yield return new WaitWhile (() => girlSound.isPlaying);
                             yield return new WaitForSeconds(1);
                                 scavangerPool.SetActive(true);
+                                transform.parent.GetComponent<TriggeredScript>().isTriggered = true;
             }
 }

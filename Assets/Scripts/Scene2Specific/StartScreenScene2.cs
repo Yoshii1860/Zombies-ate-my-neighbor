@@ -16,9 +16,12 @@ public class StartScreenScene2 : MonoBehaviour
     AudioSource playerAudio;
     GameObject weapons;
     LoadGame loadGame;
+    SaveGame saveGame;
 
     void Start()
     {
+        blackScreen.transform.gameObject.SetActive(true);
+        saveGame = FindObjectOfType<SaveGame>();
         loadGame = FindObjectOfType<LoadGame>();
         audioSource = GetComponent<AudioSource>();
         rbc = player.GetComponent<RigidbodyFirstPersonController>();
@@ -26,6 +29,9 @@ public class StartScreenScene2 : MonoBehaviour
         weapons = player.transform.GetChild(0).GetChild(0).gameObject;
         rbc.enabled = false;
         playerAudio.enabled = false;
+        Vector3 playerPosition = new Vector3(610.070f, 4.769f, 126.936f);
+        saveGame.SetPlayerPosition(playerPosition);
+        saveGame.enabled = true;
         weapons.SetActive(false);
         StartCoroutine(StartSequence());
     }
@@ -43,6 +49,8 @@ public class StartScreenScene2 : MonoBehaviour
             playerAudio.enabled = true;
             weapons.SetActive(true);
             loadGame.enabled = true;
+            loadGame.LoadPlayerPosition();
+            GetComponent<TriggeredScript>().isTriggered = true;
             blackScreen.CrossFadeAlpha(0f, 0f, false);
     }
 }

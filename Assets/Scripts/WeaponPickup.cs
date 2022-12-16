@@ -28,6 +28,7 @@ public class WeaponPickup : MonoBehaviour
     AudioSource audioSource;
     public bool key = false;
     bool doorOpen = false;
+    bool hadInteraction = false;
 
     void Start()
     {
@@ -120,6 +121,10 @@ public class WeaponPickup : MonoBehaviour
             {
                 ammoCanvas.enabled = true;
             }
+            if(!reticleToHide.enabled)
+            {
+                reticleToHide.enabled = true;
+            }
             Destroy(gameObjectClicked.transform.GetChild(2).gameObject);
         }
     }
@@ -130,6 +135,7 @@ public class WeaponPickup : MonoBehaviour
         RaycastHit rayHit;
         if(Physics.Raycast(ray, out rayHit, 2.1f) && rayHit.transform.gameObject.tag == "Interact")
         {
+            hadInteraction = true;
             actionCanvas.enabled = true;
             reticleToHide.enabled = false;
             if(rayHit.transform.gameObject.GetComponent<BoxContent>().weapon.GetComponent<Weapon>().pickedUp 
@@ -148,6 +154,7 @@ public class WeaponPickup : MonoBehaviour
         }
         else if(Physics.Raycast(ray, out rayHit, 2.1f) && rayHit.transform.gameObject.tag == "Action")
         {
+            hadInteraction = true;
             actionCanvas.enabled = true;
             reticleToHide.enabled = false;
             presseImg.enabled = true;
@@ -156,6 +163,7 @@ public class WeaponPickup : MonoBehaviour
         }
         else if(Physics.Raycast(ray, out rayHit, 2.1f) && rayHit.transform.gameObject.tag == "Door" && !doorOpen)
         {
+            hadInteraction = true;
             actionCanvas.enabled = true;
             reticleToHide.enabled = false;
             if(key)
@@ -172,6 +180,7 @@ public class WeaponPickup : MonoBehaviour
         }
         else if(Physics.Raycast(ray, out rayHit, 2.1f) && rayHit.transform.gameObject.tag == "Key")
         {
+            hadInteraction = true;
             actionCanvas.enabled = true;
             reticleToHide.enabled = false;
             presseImg.enabled = true;
@@ -190,7 +199,11 @@ public class WeaponPickup : MonoBehaviour
             float dist = Vector3.Distance(gameObjectFocus.transform.position, transform.position);
             if(dist >= 2.1f)
             {
+                if(hadInteraction)
+                {
                 reticleToHide.enabled = true;
+                hadInteraction = false;
+                }
                 actionCanvas.enabled = false;
             }
         }

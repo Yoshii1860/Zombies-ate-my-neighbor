@@ -12,7 +12,7 @@ public class HealthPickup : MonoBehaviour
         {
             FindObjectOfType<PlayerHealth>().ChangeHealth();
             pickup.Play();
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

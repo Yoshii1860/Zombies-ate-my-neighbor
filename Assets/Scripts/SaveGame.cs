@@ -12,23 +12,43 @@ public class SaveGame : MonoBehaviour
     [SerializeField] Weapon shotgunPickedUp;
     [SerializeField] Weapon riflePickedUp;
     [SerializeField] Weapon sniperPickedUp;
+    [SerializeField] Canvas reticle;
+    [SerializeField] Canvas ammoDisplay;
+    [SerializeField] GameObject flashlight;
+    [SerializeField] SavePickups pickups;
+    [SerializeField] SaveEnemies enemies;
+    [SerializeField] SaveTriggers triggers;
+    [SerializeField] Transform player;
 
     Ammo ammo;
+    PlayerHealth playerHealth;
+
     int pistolAmmo = 0;
     int shotgunAmmo = 0;
     int rifleAmmo = 0;
     int sniperAmmo = 0;
+    
+    float health;
+
+    Vector3 playerPosition;
 
     void Awake() 
     {
-        this.enabled = false;
         ammo = FindObjectOfType<Ammo>();
+        playerHealth = player.GetComponent<PlayerHealth>();
     }
 
     void Start()
     {
+        Debug.Log("Save");
         GetBullets();
         GetWeapons();
+        SaveHealth();
+        SavePlayerPosition();
+        SaveCanvas();
+        SavePickups();
+        SaveEnemies();
+        SaveTriggers();
         PlayerPrefs.Save();
         this.enabled = false;
     }
@@ -87,5 +107,90 @@ public class SaveGame : MonoBehaviour
         {
             PlayerPrefs.SetString("sniper", "false");
         }
+    }
+
+    void SaveHealth()
+    {
+        health = playerHealth.GetHealth();
+        PlayerPrefs.SetFloat("health", health);
+    }
+
+    void SavePlayerPosition()
+    {
+        PlayerPrefs.SetFloat("ppX", playerPosition.x);
+        PlayerPrefs.SetFloat("ppY", playerPosition.y);
+        PlayerPrefs.SetFloat("ppZ", playerPosition.z);
+    }
+
+    void SaveCanvas()
+    {
+        if(reticle.enabled)
+        {
+            PlayerPrefs.SetString("reticle", "true");
+        }
+        else
+        {
+            PlayerPrefs.SetString("reticle", "false");
+        }
+
+        if(ammoDisplay.enabled)
+        {
+            PlayerPrefs.SetString("ammoDisplay", "true");
+        }
+        else
+        {
+            PlayerPrefs.SetString("ammoDisplay", "false");
+        }
+        
+        if(flashlight.activeSelf)
+        {
+            PlayerPrefs.SetString("flashlight", "true");
+        }
+        else
+        {
+            PlayerPrefs.SetString("flashlight", "false");
+        }
+    }
+
+    void SavePickups()
+    {
+        int i = 0;
+        foreach(GameObject pickup in pickups.pickupObjects)
+        {   
+            string nameString = pickup.name + i.ToString();      
+            string name = pickups.pickupStrings[i];
+            PlayerPrefs.SetString(nameString, name);
+            i++;
+        }
+    }
+
+    void SaveEnemies()
+    {
+        int i = 0;
+        foreach(EnemyHealth enemy in enemies.enemyArray)
+        {   
+            string nameString = enemy.transform.gameObject.name + i.ToString();      
+            string name = enemies.enemyStrings[i];
+            PlayerPrefs.SetString(nameString, name);
+            i++;
+        }
+    }
+
+    void SaveTriggers()
+    {
+        int i = 0;
+        foreach(TriggeredScript trigger in triggers.triggerArray)
+        {   
+            string nameString = trigger.transform.gameObject.name + i.ToString();      
+            string name = triggers.triggerStrings[i];
+            PlayerPrefs.SetString(nameString, name);
+            i++;
+        }
+    }
+
+    public void SetPlayerPosition(Vector3 position)
+    {
+        playerPosition = position;
+        Debug.Log("SaveGame, public void: " + playerPosition);
     }
 }

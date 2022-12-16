@@ -9,6 +9,7 @@ public class DollTrigger : MonoBehaviour
     [SerializeField] LightFlickering light;
     [SerializeField] GameObject flashlight;
     [SerializeField] GameObject blood;
+    [SerializeField] GameObject zombies;
     [SerializeField] AudioClip lightSound;
     [SerializeField] AudioClip footStepSound;
     [SerializeField] AudioClip girlBehindSound;
@@ -17,7 +18,6 @@ public class DollTrigger : MonoBehaviour
     AudioSource audioSource;
 
     bool isInside = false;
-    bool notFinished = false;
     int count = 0;
     public bool dollTrigger = false;
 
@@ -40,11 +40,10 @@ public class DollTrigger : MonoBehaviour
             count ++;
         }
 
-        if(count >= 2 && rifle.pickedUp && !notFinished)
+        if(count >= 2 && rifle.pickedUp && !dollTrigger)
         {
             dollTrigger = true;
             audioSource.PlayOneShot(girlBehindSound, 1f);
-            notFinished = true;
             light.maxIntensity = 0f;
             flashlight.SetActive(false);
             fogRenderer.enabled = false;
@@ -59,6 +58,7 @@ public class DollTrigger : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
             blood.SetActive(true);
+            zombies.SetActive(true);
             doll.transform.Translate(-6.14f, -1.38f, 0);
             RenderSettings.fogEndDistance = 10f;
             fogRenderer.enabled = true;
@@ -66,5 +66,6 @@ public class DollTrigger : MonoBehaviour
             light.maxIntensity = 0.2f;
             light.smoothing = 15;
             light.gameObject.GetComponent<Light>().color = new Color(1,0,0,0.8f);
+            transform.parent.GetComponent<TriggeredScript>().isTriggered = true;
     }
 }

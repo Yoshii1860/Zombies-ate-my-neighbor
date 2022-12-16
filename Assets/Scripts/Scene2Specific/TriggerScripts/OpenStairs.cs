@@ -28,6 +28,7 @@ public class OpenStairs : MonoBehaviour
                 barrickadeNew.SetActive(true);
                 doll.SetActive(false);
                 StartCoroutine(MakeMusicPlay());
+                transform.parent.parent.GetComponent<TriggeredScript>().isTriggered = true;
             } else return;
         }
     }

@@ -18,6 +18,7 @@ public class FindMeTrigger : MonoBehaviour
         {
             audioSource.Play();
             triggered = true;
+            transform.parent.GetComponent<TriggeredScript>().isTriggered = true;
         }
     }
 }
