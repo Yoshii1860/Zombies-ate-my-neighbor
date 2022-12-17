@@ -8,26 +8,18 @@ public class SaveTriggers : MonoBehaviour
     [SerializeField] public string[] triggerStrings;
     int i = 0;
 
-    void OnAwake() 
+    void Start() 
     {
         Debug.Log("SaveTriggers");
         foreach(TriggeredScript trigger in triggerArray)
         {
             string name = trigger.transform.gameObject.name + i.ToString();
-            if(PlayerPrefs.GetString(name) == "true")
-            {
-                return;
-            }
-            else
+            if (triggerStrings[i] == "null")
             {
                 triggerStrings[i] = name;
             }
-
-            if(i != triggerArray.Length-1)
-            {
-                i++;
-            }
-            else
+            i++;
+            if(i == triggerArray.Length)
             {
                 i = 0;
             }
@@ -39,24 +31,14 @@ public class SaveTriggers : MonoBehaviour
         foreach(TriggeredScript trigger in triggerArray)
         {
             string name = trigger.transform.gameObject.name + i.ToString();
-            if(PlayerPrefs.GetString(name) == "true")
-            {
-                return;
-            }
-            else if(trigger.isTriggered)
+            if(trigger.isTriggered && PlayerPrefs.GetString(name) == name)
             {
                 triggerStrings[i] = "true";
             }
-
-            if(i != triggerArray.Length-1)
-            {
-                i++;
-                Debug.Log(i);
-            }
-            else
+            i++;
+            if(i == triggerArray.Length)
             {
                 i = 0;
-                Debug.Log(i);
             }
         }
     }

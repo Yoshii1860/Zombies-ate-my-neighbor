@@ -27,6 +27,10 @@ public class SaveGame : MonoBehaviour
     int shotgunAmmo = 0;
     int rifleAmmo = 0;
     int sniperAmmo = 0;
+
+    int iSE = 0;
+    int iSP = 0;
+    int iST = 0;
     
     float health;
 
@@ -178,19 +182,21 @@ public class SaveGame : MonoBehaviour
 
     void SaveTriggers()
     {
-        int i = 0;
         foreach(TriggeredScript trigger in triggers.triggerArray)
         {   
-            string nameString = trigger.transform.gameObject.name + i.ToString();      
-            string name = triggers.triggerStrings[i];
+            string nameString = trigger.transform.gameObject.name + iST.ToString();      
+            string name = triggers.triggerStrings[iST];
             PlayerPrefs.SetString(nameString, name);
-            i++;
+            iST++;
+            if(iST == triggers.triggerArray.Length)
+            {
+                iST = 0;
+            }
         }
     }
 
     public void SetPlayerPosition(Vector3 position)
     {
         playerPosition = position;
-        Debug.Log("SaveGame, public void: " + playerPosition);
     }
 }

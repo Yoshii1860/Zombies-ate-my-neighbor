@@ -18,6 +18,14 @@ public class LoadGame : MonoBehaviour
     [SerializeField] SavePickups pickups;
     [SerializeField] SaveEnemies enemies;
     [SerializeField] SaveTriggers triggers;
+    [SerializeField] MovieTrigger movieTrigger;
+    [SerializeField] DollTrigger dollTrigger;
+    [SerializeField] GameObject barrickadeOne;
+    [SerializeField] GameObject barrickadeThree;
+    [SerializeField] GameObject savePointZero;
+    [SerializeField] GameObject savePointOne;
+    [SerializeField] GameObject savePointTwo;
+    [SerializeField] GameObject savePointThree;
     [SerializeField] Transform player;
 
     Ammo ammo;
@@ -39,10 +47,17 @@ public class LoadGame : MonoBehaviour
     float ppY;
     float ppZ;
 
+    SaveLightChange saveLight;
+    FogRenderer fogRenderer;
+    DentistTrigger dentist;
+
     void Awake() 
     {
         ammo = FindObjectOfType<Ammo>();
         playerHealth = player.GetComponent<PlayerHealth>();
+        saveLight = FindObjectOfType<SaveLightChange>();
+        fogRenderer = triggers.transform.GetChild(2).GetComponent<FogRenderer>();
+        dentist = FindObjectOfType<DentistTrigger>();
     }
 
     void OnEnable() 
@@ -140,15 +155,12 @@ public class LoadGame : MonoBehaviour
         ppY = PlayerPrefs.GetFloat("ppY");
         ppZ = PlayerPrefs.GetFloat("ppZ");
         playerPosition = new Vector3(ppX, ppY, ppZ);
-        Debug.Log("LoadGame: " + playerPosition);
         LoadPosition();
     }
 
     void LoadPosition()
     {
         player.position = playerPosition;
-        Debug.Log("LoadGame LoadPositionNow: " + playerPosition);
-        Debug.Log("LoadGame PlayerPositionNow: " + player.position);
     }
 
     void LoadCanvas()
@@ -175,7 +187,12 @@ public class LoadGame : MonoBehaviour
             string nameString = pickup.name + i.ToString();
             if(PlayerPrefs.GetString(nameString) == "true")
             {
+                pickups.pickupStrings[i] = "true";
                 pickup.SetActive(false);
+            }
+            else
+            {
+                pickups.pickupStrings[i] = nameString; 
             }
             i++;
         }
@@ -189,7 +206,12 @@ public class LoadGame : MonoBehaviour
             string nameString = enemy.transform.gameObject.name + i.ToString();
             if(PlayerPrefs.GetString(nameString) == "true")
             {
+                enemies.enemyStrings[i] = "true";
                 enemy.transform.gameObject.SetActive(false);
+            }
+            else
+            {
+                enemies.enemyStrings[i] = nameString; 
             }
             i++;
         }
@@ -203,8 +225,43 @@ public class LoadGame : MonoBehaviour
             string nameString = trigger.transform.gameObject.name + i.ToString();
             if(PlayerPrefs.GetString(nameString) == "true")
             {
-                Debug.Log("Wants to deactivate a trigger");
+                triggers.triggerStrings[i] = "true";
                 trigger.transform.gameObject.SetActive(false);
+                if(i == 1) //LoadLightChange
+                {
+                    saveLight.enabled = true;
+                    fogRenderer.isInside = true;
+                    Destroy(savePointZero);
+                }
+
+                if(i == 2) //DollTrigger
+                {
+                    dollTrigger.dollTrigger = true;
+                    dollTrigger.publicTriggerEvent();
+                    Destroy(savePointOne);
+                }
+
+                if(i == 3) //MovieTrigger
+                {
+                    movieTrigger.movieTrigger = true;
+                    Destroy(savePointTwo);
+                }
+
+                if(i == 4)
+                {
+                    barrickadeOne.SetActive(false);
+                    barrickadeThree.SetActive(true);
+                    Destroy(savePointThree);
+                }
+
+                if(i == 6)
+                {
+                    dentist.DentistTriggered();
+                }
+            }
+            else
+            {
+                triggers.triggerStrings[i] = nameString; 
             }
             i++;
         }

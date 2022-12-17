@@ -13,6 +13,7 @@ public class MovieTrigger : MonoBehaviour
     [SerializeField] AudioSource girlSound;
     [SerializeField] Rigidbody rb;
     [SerializeField] GameObject scavangerPool;
+    [SerializeField] GameObject savePoint;
     PlayerSounds ps;
     AudioSource audioSource;
     bool activeVideo = false;
@@ -51,6 +52,7 @@ public class MovieTrigger : MonoBehaviour
         yield return new WaitForSeconds(2);
             yield return new WaitWhile (() => videoPlayer.isPlaying);
                 rb.isKinematic = false;
+                savePoint.SetActive(true);
                 ps.StartSounds();
                 audioSource.Stop();
                 audioSource.PlayOneShot(projectorStop, 0.2f);

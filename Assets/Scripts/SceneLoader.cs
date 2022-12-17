@@ -18,6 +18,7 @@ public class SceneLoader : MonoBehaviour
     void Start() 
     {
         currentScene = SceneManager.GetActiveScene();
+        int nextScene = currentScene.buildIndex + 1;
         saveGame = FindObjectOfType<SaveGame>();
         Transform player = FindObjectOfType<PlayerHealth>().transform;
         Vector3 playerPosition = player.position;
@@ -39,6 +40,11 @@ public class SceneLoader : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void AsyncLoad()
+    {
+        AsyncOperation LoadSceneAsync(int nextScene, SceneManagement.LoadSceneMode mode = LoadSceneMode.Single);
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)

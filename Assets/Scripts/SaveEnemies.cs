@@ -8,26 +8,18 @@ public class SaveEnemies : MonoBehaviour
     [SerializeField] public string[] enemyStrings;
     int i = 0;
 
-    void OnAwake() 
+    void Start() 
     {
         Debug.Log("SaveEnemies");
         foreach(EnemyHealth enemy in enemyArray)
         {
             string name = enemy.transform.gameObject.name + i.ToString();
-            if(PlayerPrefs.GetString(name) == "true")
-            {
-                return;
-            }
-            else
+            if(enemyStrings[i] == "null")
             {
                 enemyStrings[i] = name;
             }
-
-            if(i != enemyArray.Length-1)
-            {
-                i++;
-            }
-            else
+            i++;
+            if(i == enemyArray.Length)
             {
                 i = 0;
             }
@@ -40,20 +32,12 @@ public class SaveEnemies : MonoBehaviour
         {
             bool dead = enemy.IsDead();
             string name = enemy.transform.gameObject.name + i.ToString();
-            if(PlayerPrefs.GetString(name) == "true")
-            {
-                return;
-            }
-            else if(dead)
+            if(dead && PlayerPrefs.GetString(name) == name)
             {
                 enemyStrings[i] = "true";
             }
-
-            if(i != enemyArray.Length-1)
-            {
-                i++;
-            }
-            else
+            i++;
+            if(i == enemyArray.Length)
             {
                 i = 0;
             }

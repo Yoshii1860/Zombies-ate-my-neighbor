@@ -8,26 +8,18 @@ public class SavePickups : MonoBehaviour
     [SerializeField] public string[] pickupStrings;
     int i = 0;
 
-    void OnAwake() 
+    void Start() 
     {
         Debug.Log("SavePickups");
         foreach(GameObject pickup in pickupObjects)
         {
             string name = pickup.name + i.ToString();
-            if(PlayerPrefs.GetString(name) == "true")
-            {
-                return;
-            }
-            else
+            if(pickupStrings[i] == "null")
             {
                 pickupStrings[i] = name;
             }
-
-            if(i != pickupObjects.Length-1)
-            {
-                i++;
-            }
-            else
+            i++;
+            if(i == pickupObjects.Length)
             {
                 i = 0;
             }
@@ -39,20 +31,12 @@ public class SavePickups : MonoBehaviour
         foreach(GameObject pickup in pickupObjects)
         {
             string name = pickup.name + i.ToString();  
-            if(PlayerPrefs.GetString(name) == "true")
-            {
-                return;
-            }
-            else if(!pickup.activeSelf)
+            if(!pickup.activeSelf && PlayerPrefs.GetString(name) == name)
             {
                     pickupStrings[i] = "true";
             }
-
-            if(i != pickupObjects.Length-1)
-            {
-                i++;
-            }
-            else
+            i++;
+            if(i == pickupStrings.Length)
             {
                 i = 0;
             }

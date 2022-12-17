@@ -68,4 +68,13 @@ public class DollTrigger : MonoBehaviour
             light.gameObject.GetComponent<Light>().color = new Color(1,0,0,0.8f);
             transform.parent.GetComponent<TriggeredScript>().isTriggered = true;
     }
+
+    public void publicTriggerEvent()
+    {
+        blood.SetActive(true);
+        doll.transform.Translate(-6.14f, -1.38f, 0);
+        light.smoothing = 15;
+        light.gameObject.GetComponent<Light>().color = new Color(1,0,0,0.8f);
+        transform.parent.GetComponent<TriggeredScript>().isTriggered = true;
+    }
 }

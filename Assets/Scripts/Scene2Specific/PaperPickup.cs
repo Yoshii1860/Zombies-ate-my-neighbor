@@ -5,6 +5,7 @@ using UnityEngine;
 public class PaperPickup : MonoBehaviour
 {
     [SerializeField] GameObject trigger;
+    [SerializeField] GameObject savePoint;
     Rigidbody rb;
     PlayerSounds ps;
 
@@ -30,6 +31,7 @@ public class PaperPickup : MonoBehaviour
             rb.isKinematic = false;
             transform.parent.GetChild(0).gameObject.SetActive(true);
             trigger.SetActive(true);
+            savePoint.SetActive(true);
             transform.gameObject.SetActive(false);
         }
     }

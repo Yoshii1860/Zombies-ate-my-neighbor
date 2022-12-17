@@ -20,7 +20,6 @@ public class SavePoint : MonoBehaviour
             Debug.Log("SavePoint");
             GameObject newSavePoint = Instantiate(savePoint, savePoint.transform);
             playerPosition = other.gameObject.transform.position;
-            Debug.Log("SavePoint: " + playerPosition);
             newSavePoint.GetComponent<SaveGame>().SetPlayerPosition(playerPosition);
             newSavePoint.GetComponent<SaveGame>().enabled = true;
             this.transform.GetComponent<BoxCollider>().enabled = false;

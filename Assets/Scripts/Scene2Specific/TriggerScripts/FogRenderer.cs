@@ -11,12 +11,17 @@ public class FogRenderer : MonoBehaviour
     Color fogColorCurrent;
     float fogEnd;
     float distance;
-    bool isInside = false;
+    public bool isInside = false;
 
     void Start() 
     {
         fogColorCurrent = RenderSettings.fogColor;
         fogEnd = RenderSettings.fogEndDistance;
+        if(isInside)
+        {
+            RenderSettings.fogColor = fogColorNew;
+            RenderSettings.fogEndDistance = fogEndNew;
+        }
     }
 
     void Update() 

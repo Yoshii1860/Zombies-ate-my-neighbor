@@ -16,7 +16,7 @@ public class ScavangerEnter : MonoBehaviour
     AudioSource fadeAudioSource;
     SaveGame saveGame;
 
-    void Awake() 
+    void Start() 
     {
         saveGame = FindObjectOfType<SaveGame>();
     }
@@ -33,6 +33,7 @@ public class ScavangerEnter : MonoBehaviour
                 }
                 scavanger.GetComponent<EnemyAI>().chaseRange = 500f;
                 StartCoroutine(EndScene());
+                transform.Translate(100,100,100);
             }
         }
     }
@@ -47,6 +48,7 @@ public class ScavangerEnter : MonoBehaviour
         yield return new WaitForSeconds(2);
         heartbeatAudio.Play();
         saveGame.enabled = true;
+        gameSession.AsyncLoad();
         yield return new WaitWhile(() => heartbeatAudio.isPlaying);
         gameSession.NextScene();
     }

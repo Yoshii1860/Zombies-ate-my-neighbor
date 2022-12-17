@@ -41,4 +41,10 @@ public class DentistTrigger : MonoBehaviour
         transform.parent.GetComponent<TriggeredScript>().isTriggered = true;
         yield break;
     }
+
+    public void DentistTriggered()
+    {
+        dollStairs.SetActive(false);
+        dollClassroom.SetActive(true);
+    }
 }

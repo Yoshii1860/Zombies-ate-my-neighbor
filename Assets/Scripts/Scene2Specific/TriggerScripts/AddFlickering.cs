@@ -14,7 +14,7 @@ public class AddFlickering : MonoBehaviour
         newLights = asylumLights.GetComponentsInChildren<Light>();
         foreach (Light light in newLights)
         {
-            light.gameObject.SetActive(false);
+            light.gameObject.GetComponent<LightFlickering>().enabled = false;
         }
     }
 
@@ -48,6 +48,6 @@ public class AddFlickering : MonoBehaviour
     IEnumerator ActivateNewLight(Light light)
     {
         yield return new WaitForSeconds(5);
-        light.gameObject.SetActive(true);
+        light.gameObject.GetComponent<LightFlickering>().enabled = true;
     }
 }
