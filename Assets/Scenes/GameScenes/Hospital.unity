@@ -17632,6 +17632,22 @@ PrefabInstance:
       propertyPath: hordeTrigger
       value: 
       objectReference: {fileID: 1619293379}
+    - target: {fileID: 655435341, guid: b6679daa6f2c9a742845092e73420f5d, type: 3}
+      propertyPath: rifle
+      value: 
+      objectReference: {fileID: 623434763}
+    - target: {fileID: 655435341, guid: b6679daa6f2c9a742845092e73420f5d, type: 3}
+      propertyPath: pistol
+      value: 
+      objectReference: {fileID: 963826938}
+    - target: {fileID: 655435341, guid: b6679daa6f2c9a742845092e73420f5d, type: 3}
+      propertyPath: sniper
+      value: 
+      objectReference: {fileID: 963826936}
+    - target: {fileID: 655435341, guid: b6679daa6f2c9a742845092e73420f5d, type: 3}
+      propertyPath: shotgun
+      value: 
+      objectReference: {fileID: 963826937}
     - target: {fileID: 773800178342132283, guid: b6679daa6f2c9a742845092e73420f5d,
         type: 3}
       propertyPath: deathAudio
@@ -17742,6 +17758,11 @@ PrefabInstance:
       propertyPath: trigger
       value: 
       objectReference: {fileID: 267087643}
+    - target: {fileID: 5987407570548192473, guid: b6679daa6f2c9a742845092e73420f5d,
+        type: 3}
+      propertyPath: savePoint
+      value: 
+      objectReference: {fileID: 760156390}
     - target: {fileID: 8317294335875963984, guid: b6679daa6f2c9a742845092e73420f5d,
         type: 3}
       propertyPath: ammoText

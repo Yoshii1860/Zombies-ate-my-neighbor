@@ -102,7 +102,7 @@ public class EnemyAI : MonoBehaviour
             navMeshAgent.enabled = false;
             GetComponent<Collider>().enabled = false;
             GetComponent<EnemyAttack>().enabled = false;
-            GetComponent<NavMeshAgent>().enabled = false;
+            this.enabled = true;
         }
 
         distanceToTarget = Vector3.Distance(target.position, transform.position);
@@ -133,10 +133,9 @@ public class EnemyAI : MonoBehaviour
             audioSource.Stop();
             audioSource.clip = deathSound;
             audioSource.PlayOneShot(deathSound, 1.5f);
-            enabled = false;
-            navMeshAgent.enabled = false;
             GetComponent<Collider>().enabled = false;
             GetComponent<EnemyAttack>().enabled = false;
+            this.enabled = false;
         }
 
         distanceToTarget = Vector3.Distance(target.position, transform.position);

@@ -6,6 +6,11 @@ using UnityEngine;
 public class WeaponSwitcher : MonoBehaviour
 {
     [SerializeField] int currentWeapon = 0;
+    [SerializeField] Weapon pistol;
+    [SerializeField] Weapon shotgun;
+    [SerializeField] Weapon rifle;
+    [SerializeField] Weapon sniper;
+
 
     void Start() 
     {
@@ -14,15 +19,10 @@ public class WeaponSwitcher : MonoBehaviour
 
     void Update() 
     {
-        int previousWeapon = currentWeapon;
 
         ProcessKeyInput();
         ProcessScrollWheel();
 
-        if(previousWeapon != currentWeapon)
-        {
-            SetWeaponActive();
-        }
     }
 
     void ProcessScrollWheel()
@@ -37,6 +37,7 @@ public class WeaponSwitcher : MonoBehaviour
             {
                 currentWeapon++;
             }
+            SetWeaponActivePlus();
         }
 
         if(Input.GetAxis("Mouse ScrollWheel") > 0)
@@ -49,26 +50,75 @@ public class WeaponSwitcher : MonoBehaviour
             {
                 currentWeapon--;
             }
+            SetWeaponActiveMinus();
         }
     }
 
     void ProcessKeyInput()
     {
-        if(Input.GetKeyDown(KeyCode.Alpha1))
+        if(Input.GetKeyDown(KeyCode.Alpha1) && pistol.pickedUp)
         {
             currentWeapon = 0;
+            SetWeaponActive();
         }
-        if(Input.GetKeyDown(KeyCode.Alpha2))
+        if(Input.GetKeyDown(KeyCode.Alpha2) && shotgun.pickedUp)
         {
             currentWeapon = 1;
+            SetWeaponActive();
         }
-        if(Input.GetKeyDown(KeyCode.Alpha3))
+        if(Input.GetKeyDown(KeyCode.Alpha3) && rifle.pickedUp)
         {
             currentWeapon = 2;
+            SetWeaponActive();
         }
-        if(Input.GetKeyDown(KeyCode.Alpha4))
+        if(Input.GetKeyDown(KeyCode.Alpha4) && sniper.pickedUp)
         {
             currentWeapon = 3;
+            SetWeaponActive();
+        }
+    }
+
+    void SetWeaponActivePlus()
+    {
+        int weaponIndex = 0;
+
+        foreach(Transform weapon in transform)
+        {
+            if(weaponIndex == currentWeapon && weapon.gameObject.GetComponent<Weapon>().pickedUp == true)
+            {
+                weapon.gameObject.SetActive(true);
+            }
+            else if(weaponIndex == currentWeapon && weapon.gameObject.GetComponent<Weapon>().pickedUp == false)
+            {
+                currentWeapon++;
+            }
+            else
+            {
+                weapon.gameObject.SetActive(false);
+            }
+            weaponIndex++;
+        }
+    }
+
+    void SetWeaponActiveMinus()
+    {
+        int weaponIndex = 0;
+
+        foreach(Transform weapon in transform)
+        {
+            if(weaponIndex == currentWeapon && weapon.gameObject.GetComponent<Weapon>().pickedUp == true)
+            {
+                weapon.gameObject.SetActive(true);
+            }
+            else if(weaponIndex == currentWeapon && weapon.gameObject.GetComponent<Weapon>().pickedUp == false)
+            {
+                currentWeapon--;
+            }
+            else
+            {
+                weapon.gameObject.SetActive(false);
+            }
+            weaponIndex++;
         }
     }
 

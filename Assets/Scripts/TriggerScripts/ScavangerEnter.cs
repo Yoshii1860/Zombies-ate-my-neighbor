@@ -48,7 +48,6 @@ public class ScavangerEnter : MonoBehaviour
         yield return new WaitForSeconds(2);
         heartbeatAudio.Play();
         saveGame.enabled = true;
-        gameSession.AsyncLoad();
         yield return new WaitWhile(() => heartbeatAudio.isPlaying);
         gameSession.NextScene();
     }
