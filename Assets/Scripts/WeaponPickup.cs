@@ -18,6 +18,8 @@ public class WeaponPickup : MonoBehaviour
     [SerializeField] AudioClip lockedDoor;
     [SerializeField] AudioClip unlockDoor;
     [SerializeField] GameObject newKey;
+    [SerializeField] GameObject fogRendererOld;
+    [SerializeField] GameObject fogRendererNew;
 
     float openTime = 2;
     GameObject gameObjectClicked;
@@ -82,6 +84,8 @@ public class WeaponPickup : MonoBehaviour
                     audioDoor.PlayOneShot(unlockDoor, 0.7f);
                     actionCanvas.enabled = false;
                     doorOpen = true;
+                    fogRendererOld.SetActive(false);
+                    fogRendererNew.SetActive(true);
                 }
                 else if(!key && !doorOpen)
                 {

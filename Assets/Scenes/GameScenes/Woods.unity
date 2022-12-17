@@ -7750,7 +7750,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-3540326
+  m_Name: pb_Mesh2188358
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -10302,7 +10302,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-3540340
+  m_Name: pb_Mesh2192042
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -12747,6 +12747,22 @@ PrefabInstance:
       propertyPath: jumpSounds
       value: 
       objectReference: {fileID: 755526243}
+    - target: {fileID: 655435341, guid: b6679daa6f2c9a742845092e73420f5d, type: 3}
+      propertyPath: rifle
+      value: 
+      objectReference: {fileID: 1382652633}
+    - target: {fileID: 655435341, guid: b6679daa6f2c9a742845092e73420f5d, type: 3}
+      propertyPath: pistol
+      value: 
+      objectReference: {fileID: 975956921}
+    - target: {fileID: 655435341, guid: b6679daa6f2c9a742845092e73420f5d, type: 3}
+      propertyPath: sniper
+      value: 
+      objectReference: {fileID: 1401290132}
+    - target: {fileID: 655435341, guid: b6679daa6f2c9a742845092e73420f5d, type: 3}
+      propertyPath: shotgun
+      value: 
+      objectReference: {fileID: 1583897337}
     - target: {fileID: 773800178342132283, guid: b6679daa6f2c9a742845092e73420f5d,
         type: 3}
       propertyPath: deathAudio
@@ -12761,6 +12777,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2668553152165703054, guid: b6679daa6f2c9a742845092e73420f5d,
+        type: 3}
+      propertyPath: movementSettings.StrafeSpeed
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2668553152176429164, guid: b6679daa6f2c9a742845092e73420f5d,
         type: 3}

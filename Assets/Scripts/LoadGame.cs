@@ -25,7 +25,6 @@ public class LoadGame : MonoBehaviour
     [SerializeField] GameObject savePointZero;
     [SerializeField] GameObject savePointOne;
     [SerializeField] GameObject savePointTwo;
-    [SerializeField] GameObject savePointThree;
     [SerializeField] Transform player;
 
     Ammo ammo;
@@ -238,20 +237,19 @@ public class LoadGame : MonoBehaviour
                 {
                     dollTrigger.dollTrigger = true;
                     dollTrigger.publicTriggerEvent();
-                    Destroy(savePointOne);
                 }
 
                 if(i == 3) //MovieTrigger
                 {
                     movieTrigger.movieTrigger = true;
-                    Destroy(savePointTwo);
+                    Destroy(savePointOne);
                 }
 
                 if(i == 4)
                 {
                     barrickadeOne.SetActive(false);
                     barrickadeThree.SetActive(true);
-                    Destroy(savePointThree);
+                    Destroy(savePointTwo);
                 }
 
                 if(i == 6)

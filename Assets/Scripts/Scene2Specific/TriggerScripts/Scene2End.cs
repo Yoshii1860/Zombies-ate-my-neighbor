@@ -26,6 +26,8 @@ public class Scene2End : MonoBehaviour
     float rbcBS = 0f;
     float rbcSS = 0f;
     float rbcRM = 0f;
+    float rbcMSX = 0f;
+    float rbcMSY = 0f;
     bool once = false;
 
     void Awake() 
@@ -60,6 +62,8 @@ public class Scene2End : MonoBehaviour
             light.SetActive(false);
         }        
         flashlight.SetActive(false);
+        RenderSettings.fogColor = new Color(0,0,0,1);
+        RenderSettings.fogEndDistance = 15f;
         girl.SetActive(true);
         yield return new WaitForSeconds(1);
         audioSource.PlayOneShot(girlSound, 1);
@@ -91,10 +95,14 @@ public class Scene2End : MonoBehaviour
         rbcBS = rbc.movementSettings.BackwardSpeed;
         rbcSS = rbc.movementSettings.StrafeSpeed;
         rbcRM = rbc.movementSettings.RunMultiplier;
+        rbcMSX = rbc.mouseLook.XSensitivity;
+        rbcMSY = rbc.mouseLook.YSensitivity;
         rbc.movementSettings.ForwardSpeed = 4f;
         rbc.movementSettings.BackwardSpeed = 2f;
         rbc.movementSettings.StrafeSpeed = 2f;
         rbc.movementSettings.RunMultiplier = 1f;
+        rbc.mouseLook.XSensitivity = 0.5f;
+        rbc.mouseLook.YSensitivity = 0.5f;
     }
 
     IEnumerator StartFadeOut()

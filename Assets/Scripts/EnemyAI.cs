@@ -55,20 +55,23 @@ public class EnemyAI : MonoBehaviour
     }
 
     void EngageTarget()
-    {
-        FaceTarget();
-        if(distanceToTarget >= navMeshAgent.stoppingDistance)
+    {   
+        if (!health.IsDead())
         {
-            ChaseTarget();
-        }
-        if(distanceToTarget <= navMeshAgent.stoppingDistance + 0.5f)
-        {
-            AttackTarget();
-        }
-        else if(distanceToTarget >= returnRange)
-        {
-            isProvoked = false;
-            navMeshAgent.SetDestination(startPosition);
+            FaceTarget();
+            if(distanceToTarget >= navMeshAgent.stoppingDistance)
+            {
+                ChaseTarget();
+            }
+            if(distanceToTarget <= navMeshAgent.stoppingDistance + 0.5f)
+            {
+                AttackTarget();
+            }
+            else if(distanceToTarget >= returnRange)
+            {
+                isProvoked = false;
+                navMeshAgent.SetDestination(startPosition);
+            }
         }
     }
 
@@ -99,10 +102,10 @@ public class EnemyAI : MonoBehaviour
             audioSource.clip = deathSound;
             audioSource.PlayOneShot(deathSound, 1.5f);
             enabled = false;
-            navMeshAgent.enabled = false;
             GetComponent<Collider>().enabled = false;
             GetComponent<EnemyAttack>().enabled = false;
-            this.enabled = true;
+            navMeshAgent.enabled = false;
+            this.enabled = false;
         }
 
         distanceToTarget = Vector3.Distance(target.position, transform.position);
@@ -135,6 +138,7 @@ public class EnemyAI : MonoBehaviour
             audioSource.PlayOneShot(deathSound, 1.5f);
             GetComponent<Collider>().enabled = false;
             GetComponent<EnemyAttack>().enabled = false;
+            navMeshAgent.enabled = false;
             this.enabled = false;
         }
 

@@ -115,7 +115,7 @@ public class Weapon : MonoBehaviour
             if(!chunkBlast)
             {
                 GameObject impact = Instantiate(bloodEffect, hit.point, Quaternion.LookRotation(hit.normal), hit.transform);
-                Destroy(impact, 1);
+                Destroy(impact, 0.3f);
             }
             else
             {

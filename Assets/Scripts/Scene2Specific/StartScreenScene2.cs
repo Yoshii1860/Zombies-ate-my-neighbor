@@ -49,8 +49,8 @@ public class StartScreenScene2 : MonoBehaviour
             playerAudio.enabled = true;
             weapons.SetActive(true);
             loadGame.enabled = true;
-            loadGame.LoadPlayerPosition();
             GetComponent<TriggeredScript>().isTriggered = true;
+            player.transform.position = new Vector3(610.0703f, 4.7694f, 126.9368f);
             blackScreen.CrossFadeAlpha(0f, 0f, false);
     }
 }
